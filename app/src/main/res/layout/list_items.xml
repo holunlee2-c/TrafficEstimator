@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/aMTSicon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/mtr_logo" />
+
+    <TextView
+        android:id="@+id/aDestinationtxt"
+        android:text="Destination"
+        android:layout_marginTop="8dp"
+        android:maxLines="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/aMTSicon"
+        android:layout_toEndOf="@+id/aMTSicon"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/aStartpointtxt"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aDestinationtxt"
+        android:layout_marginEnd="6dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_toEndOf="@+id/aMTSicon"
+        android:layout_toRightOf="@+id/aMTSicon"
+        android:layout_toStartOf="@id/aDatareturntxt"
+        android:maxLines="2"
+        android:text="Start Point"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/aDatareturntxt"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/aDestinationtxt"
+        android:layout_alignBottom="@id/aStartpointtxt"
+        android:maxLines="1"
+        android:text="Data Return"
+        android:textSize="15sp" />
+
+
+
+
+
+
+
+</RelativeLayout>
