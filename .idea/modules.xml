@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\anton\AndroidStudioProjects\TrafficEstimator-master\TrafficEstimator.iml" filepath="C:\Users\anton\AndroidStudioProjects\TrafficEstimator-master\TrafficEstimator.iml" />
       <module fileurl="file://$PROJECT_DIR$/TrafficEstimator-master.iml" filepath="$PROJECT_DIR$/TrafficEstimator-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

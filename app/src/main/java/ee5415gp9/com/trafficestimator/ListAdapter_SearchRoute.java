@@ -14,23 +14,20 @@ import android.widget.TextView;
  * Created by leeholun on 10/4/2018.
  */
 
-public class ListAdapter extends BaseAdapter
+public class ListAdapter_SearchRoute extends BaseAdapter
 {
     Context context;
     private final String [] values_line;
     private final String [] values_dest;
-    private final String [] values_startpt;
-    private final String [] values_datareturn;
     private final int [] MTSicon_images;
-    public ListAdapter(Context context, String [] values_line, String [] values_dest, String [] values_startpt, String [] values_datareturn, int [] MTSicon_images)
+
+    public ListAdapter_SearchRoute(Context context, String [] values_line, String [] values_dest, int [] MTSicon_images)
     {
 
 //super(context, R.layout.single_list_app_item, utilsArrayList);
         this.context = context;
         this.values_line = values_line;
         this.values_dest = values_dest;
-        this.values_startpt = values_startpt;
-        this.values_datareturn = values_datareturn;
         this.MTSicon_images = MTSicon_images;
     }
 
@@ -57,11 +54,9 @@ public class ListAdapter extends BaseAdapter
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.list_items, parent, false);
+            convertView = inflater.inflate(R.layout.list_routes, parent, false);
             viewHolder.txtLine = (TextView) convertView.findViewById(R.id.Line);
             viewHolder.txtDestination = (TextView) convertView.findViewById(R.id.destinationTxt);
-            viewHolder.txtStartpoint = (TextView) convertView.findViewById(R.id.aStartpointtxt);
-            viewHolder.textDatareturn = (TextView) convertView.findViewById(R.id.aDatareturntxt);
             viewHolder.iconMTS = (ImageView) convertView.findViewById(R.id.aMTSicon);
             result=convertView;
             convertView.setTag(viewHolder);
@@ -71,16 +66,12 @@ public class ListAdapter extends BaseAdapter
         }
         viewHolder.txtLine.setText(values_line[position]);
         viewHolder.txtDestination.setText(values_dest[position]);
-        viewHolder.txtStartpoint.setText(values_startpt[position]);
-        viewHolder.textDatareturn.setText(values_datareturn[position]);
         viewHolder.iconMTS.setImageResource(MTSicon_images[position]);
         return convertView;
     }
     private static class ViewHolder {
         TextView txtLine;
         TextView txtDestination;
-        TextView txtStartpoint;
-        TextView textDatareturn;
         ImageView iconMTS;
     }
 }

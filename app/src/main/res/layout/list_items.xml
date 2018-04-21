@@ -7,51 +7,103 @@
 
     <ImageView
         android:id="@+id/aMTSicon"
-        android:layout_width="60dp"
+        android:layout_width="35dp"
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/mtr_logo" />
 
     <TextView
-        android:id="@+id/aDestinationtxt"
-        android:text="Destination"
-        android:layout_marginTop="8dp"
-        android:maxLines="2"
-        android:layout_width="match_parent"
+        android:id="@+id/Line"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/aMTSicon"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="4dp"
+        android:gravity="center_vertical"
         android:layout_toEndOf="@+id/aMTSicon"
+        android:layout_alignTop="@+id/aMTSicon"
+        android:layout_alignBottom="@+id/aMTSicon"
+        android:text="Line"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/toDescription"
+        android:text="@string/toDescription"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/Line"
         android:layout_marginLeft="2dp"
         android:layout_marginStart="2dp"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:id="@+id/destinationTxt"
+        android:text="Destination"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/toDescription"
+        android:layout_marginStart="6dp"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/min"
+        android:text="14"
+        android:layout_marginTop="8dp"
+        android:textStyle="bold"
+        android:textColor="#007fff"
+        android:gravity="right"
+        android:layout_width="24dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/destinationTxt"
+        android:layout_marginStart="10dp"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/min_description"
+        android:text="min"
+        android:layout_marginTop="18dp"
+        android:textStyle="bold"
+        android:gravity="right"
+        android:layout_width="28dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/min"
+        android:layout_marginStart="2dp"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/aStartpointtxt"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/aDestinationtxt"
         android:layout_marginEnd="6dp"
         android:layout_marginLeft="2dp"
         android:layout_marginStart="2dp"
-        android:layout_toEndOf="@+id/aMTSicon"
-        android:layout_toRightOf="@+id/aMTSicon"
-        android:layout_toStartOf="@id/aDatareturntxt"
+        android:layout_toRightOf="@+id/Line"
+        android:layout_below="@+id/destinationTxt"
         android:maxLines="2"
         android:text="Start Point"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/aDatareturntxt"
-        android:layout_width="100dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textStyle="bold"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/aDestinationtxt"
+        android:layout_below="@+id/destinationTxt"
         android:layout_alignBottom="@id/aStartpointtxt"
-        android:maxLines="1"
-        android:text="Data Return"
-        android:textSize="15sp" />
+        android:text="00:04"
+        android:textColor="#7b00ff"
+        android:textSize="18sp" />
 
 
 

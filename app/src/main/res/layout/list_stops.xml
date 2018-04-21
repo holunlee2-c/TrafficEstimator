@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/StopSeq"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:gravity=""
+        android:textStyle="bold"
+        android:text="1."
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/Stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:gravity=""
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/StopSeq"
+        android:text="Wing Yiu House Lai Yiu Estate"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/first_time"
+        android:text="23:15"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="34dp"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Stop"
+        android:textSize="14sp"
+        android:textColor="#7b00ff" />
+
+    <TextView
+        android:id="@+id/first_min"
+        android:text="14"
+        android:gravity="right"
+        android:layout_marginTop="2dp"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_below="@+id/Stop"
+        android:layout_toRightOf="@+id/first_time"
+        android:textSize="14sp"
+        android:textColor="#7b00ff" />
+
+    <TextView
+        android:id="@+id/first_min_desc"
+        android:text="min"
+        android:layout_marginTop="2dp"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_below="@+id/Stop"
+        android:layout_toRightOf="@+id/first_min"
+        android:textSize="14sp"
+        android:textColor="#7b00ff" />
+
+    <TextView
+        android:id="@+id/first_to"
+        android:text="To"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_below="@+id/Stop"
+        android:layout_toRightOf="@+id/first_min_desc"
+        android:textSize="14sp"
+        android:textColor="#7b00ff" />
+
+    <TextView
+        android:id="@+id/first_destination"
+        android:text="Kowloon Tong"
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="6dp"
+        android:layout_below="@+id/Stop"
+        android:layout_toRightOf="@+id/first_to"
+        android:textSize="14sp"
+        android:textColor="#7b00ff" />
+
+
+    <TextView
+        android:id="@+id/second_time"
+        android:text=""
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="34dp"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/first_time"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/second_min"
+        android:text=""
+        android:gravity="right"
+        android:layout_marginTop="2dp"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_toRightOf="@+id/second_time"
+        android:layout_below="@+id/first_min" />
+
+    <TextView
+        android:id="@+id/second_min_desc"
+        android:text="min"
+        android:layout_marginTop="2dp"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_toRightOf="@+id/second_min"
+        android:layout_below="@+id/first_min"
+        android:textSize="14sp" />
+
+
+    <TextView
+        android:id="@+id/second_to"
+        android:text="To"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_below="@+id/first_time"
+        android:layout_toRightOf="@+id/second_min_desc"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/second_destination"
+        android:text="Kowloon Tong"
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="6dp"
+        android:layout_below="@+id/first_time"
+        android:layout_toRightOf="@+id/second_to"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/third_time"
+        android:text=""
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="34dp"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/second_min"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/third_min"
+        android:text=""
+        android:gravity="right"
+        android:layout_marginTop="2dp"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_toRightOf="@+id/second_time"
+        android:layout_below="@+id/second_min" />
+
+    <TextView
+        android:id="@+id/third_min_desc"
+        android:text="min"
+        android:layout_marginTop="2dp"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_toRightOf="@+id/third_min"
+        android:layout_below="@+id/second_min"
+        android:textSize="14sp" />
+
+
+    <TextView
+        android:id="@+id/third_to"
+        android:text="To"
+        android:layout_marginTop="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_below="@+id/second_time"
+        android:layout_toRightOf="@+id/third_min_desc"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/third_destination"
+        android:text="Kowloon Tong"
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="6dp"
+        android:layout_below="@+id/second_time"
+        android:layout_toRightOf="@+id/third_to"
+        android:textSize="14sp" />
+
+
+
+</RelativeLayout>

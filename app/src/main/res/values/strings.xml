@@ -2,18 +2,18 @@
     <string name="app_name">Traffic Estimator</string>
 
     <!-- *****  Netvigation Menu - Button  *******-->
-    <string name="title_home">Home</string>
-    <string name="title_favourite">Favourite</string>
-    <string name="title_search">Search Result</string>
+    <string name="navigation_home">Home</string>
+    <string name="navigation_searchHistory">Search History</string>
+    <string name="navigation_search">Route Search</string>
 
     <!-- *****  Page Title  *******-->
+    <string name="title_search">Route Search</string>
+    <string name="search_button">Search</string>
+    <string name="search_no_route">No Routes Found!</string>
+
     <string name="title_nearest_station">Nearest Station</string>
 
-
-    <!--
-    Test String - Destination
-
-    -->
+    <string name="toDescription">To</string>
 
     <string name="destin_01">Wan Chai</string>
     <string name="destin_02">Tseun Wan</string>
@@ -22,34 +22,6 @@
     <string name="destin_05">Terminal 2</string>
     <string name="destin_06">Terminal 3</string>
 
-    <!-- # Test String Array
-        <string-array name="countries_array">
-            <item>Wan Chai</item>
-            <item>Tseun Wan</item>
-            <item>HK International Airport</item>
-            <item>Terminal 1</item>
-        </string-array>
-    -->
-
-<!--
-For Trial of Customer Adaptor
--->
-
-<!--
-    <string-array name="areas_array">
-        <item>17,098,242 sq km</item>
-        <item>9,984,670 sq km</item>
-        <item>9,857,348 sq km</item>
-        <item>9,596,961 sq km</item>
-        <item>8,515,770 sq km</item>
-        <item>7,741,220 sq km</item>
-        <item>3,287,263 sq km</item>
-        <item>2,780,400 sq km</item>
-        <item>2,724,900 sq km</item>
-        <item>2,381,741 sq km</item>
-    </string-array>
--->
-
     <string-array name="destination_array">
         <item>Hung Hom</item>
         <item>Airport-Terminal 1</item>
@@ -57,7 +29,7 @@ For Trial of Customer Adaptor
         <item>Mong Kok</item>
         <item>Hong Kong</item>
         <item>Kowloon</item>
-        </string-array>
+    </string-array>
 
     <string-array name="stoppoint_array">
         <item>City University</item>
@@ -68,14 +40,26 @@ For Trial of Customer Adaptor
         <item>City University</item>
     </string-array>
 
-    <string-array name="datareturn_array">
-        <item>[hh:dd]</item>
-        <item>[hh:dd]</item>
-        <item>[hh:dd]</item>
-        <item>[hh:dd]</item>
-        <item>[hh:dd]</item>
-        <item>[hh:dd]</item>
+    <string-array name="line_array">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
     </string-array>
+
+    <string-array name="datareturn_array">
+        <item>00:04</item>
+        <item>00:04</item>
+        <item>00:04</item>
+        <item>00:04</item>
+        <item>00:04</item>
+        <item>00:04</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
