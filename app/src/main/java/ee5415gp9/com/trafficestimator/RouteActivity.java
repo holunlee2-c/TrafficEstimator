@@ -194,11 +194,7 @@ public class RouteActivity extends AppCompatActivity {
 
 
             //For Adding ETA
-//            new HttpAsyncTask().execute();
-//            String link_kmb = "http://antony9655.mynetgear.com/ETA/KMB.jsp?key=a77&key2=996b&route=N241&bound=1&serviceType=1&stop=NA06-N-4450-0&stop_seq=19";
-
             String link = "";
-
 
             if (in_company.equals("KMB") || in_company.equals("LWB"))
             {
@@ -217,7 +213,7 @@ public class RouteActivity extends AppCompatActivity {
             {
 //                http://antony9655.mynetgear.com/ETA/NLB.jsp?key=a77&key2=996b&route=30&stop=289
                 link = "http://antony9655.mynetgear.com/ETA/NLB.jsp?key=a77&key2=996b&route=" + in_eta_id + "&stop=" + stop_id;
-                System.out.println("MTR link : " + link);
+                System.out.println("NLB link : " + link);
             }
 
 
@@ -225,7 +221,7 @@ public class RouteActivity extends AppCompatActivity {
             {
                 //http://antony9655.mynetgear.com/ETA/NWFB.jsp?key=a77&key2=996b&stopid=001280&service_no=23&bound=O&stopseq=3&rdv=23-POR-1
                 link = "http://antony9655.mynetgear.com/ETA/NWFB.jsp?key=a77&key2=996b&stopid=" + stop_id + "&service_no=" + in_route + "&bound=" + in_bound + "&stopseq=" + stop_seq + "&rdv=" + in_rdv;
-                System.out.println("KMB & LWB link : " + link);
+                    System.out.println("NWFB & CB link : " + link);
             }
 
 
