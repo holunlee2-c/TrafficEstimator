@@ -1,5 +1,6 @@
 package ee5415gp9.com.trafficestimator;
 
+import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -142,7 +143,34 @@ public class RouteActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.listview);
         mListAdapter = new ListAdapter_SearchStop(this,stopseqs,stops,first_times,first_mins,first_dest_eng,second_times,second_mins,second_dest_eng,third_times,third_mins,third_dest_eng);
         mListView.setAdapter(mListAdapter);
+
+//        if (SearchFragment.pDialog != null) {
+//            if (SearchFragment.pDialog.isShowing()) {
+//                SearchFragment.pDialog.dismiss();
+//            }
+//            else {
+////                    Log.e(Vars.TAG, "It is NOT SHOWING");
+//            }
+//        }
     }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        
+        if (SearchFragment.pDialog != null) {
+            if (SearchFragment.pDialog.isShowing()) {
+                SearchFragment.pDialog.dismiss();
+            }
+            else {
+//                    Log.e(Vars.TAG, "It is NOT SHOWING");
+            }
+        }
+
+
+    }
+
 
     private void initDatabaseHelper(){
         if(eta_Db == null){
@@ -198,7 +226,7 @@ public class RouteActivity extends AppCompatActivity {
 
             if (in_company.equals("KMB") || in_company.equals("LWB"))
             {
-                link = "http://antony9655.mynetgear.com/ETA/KMB.jsp?key=a77&key2=996b&route=" + ROUTE + "&bound=" + BOUND + "&serviceType=" + SERVICE_TYPE + "&stop=" + stop_id + "&stop_seq=" + stop_seq;
+                link = "http://antony9655.mynetgear.com/ETA/KMB.jsp?key=a77&key2=996b&route=" + ROUTE + "&bound=" + BOUND + "&serviceType=" + 1 + "&stop=" + stop_id + "&stop_seq=" + stop_seq;
                 System.out.println("KMB & LWB link : " + link);
             }
 
@@ -284,6 +312,13 @@ public class RouteActivity extends AppCompatActivity {
             stopList.clear();
             super.onPreExecute();
 //            list.setAdapter(null);
+
+//            System.out.println("Starting download");
+//            pDialog = new ProgressDialog(RouteActivity.this);
+//            pDialog.setMessage("Loading... Please wait...");
+//            pDialog.setIndeterminate(false);
+//            pDialog.setCancelable(false);
+//            pDialog.show();
         }
 
         @Override
@@ -427,5 +462,6 @@ public class RouteActivity extends AppCompatActivity {
 
             return result;
         }
+
     }
 }

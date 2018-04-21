@@ -133,27 +133,28 @@ public class ListAdapter_SearchStop extends BaseAdapter
             result=convertView;
         }
 
-            viewHolder.txtFirst_time.setText(values_first_times[position]);
-            viewHolder.txtFirst_min.setText(values_first_mins[position]);
-            viewHolder.txtFirst_dest.setText(values_first_dest_eng[position]);
+        //Check if useful
+//            viewHolder.txtFirst_time.setText(values_first_times[position]);
+//            viewHolder.txtFirst_min.setText(values_first_mins[position]);
+//            viewHolder.txtFirst_dest.setText(values_first_dest_eng[position]);
+//
+//            viewHolder.txtSecond_time.setText(values_second_times[position]);
+//            viewHolder.txtSecond_min.setText(values_second_mins[position]);
+//            viewHolder.txtSecond_dest.setText(values_second_dest_eng[position]);
+//
+//            viewHolder.txtThird_time.setText(values_third_times[position]);
+//            viewHolder.txtThird_min.setText(values_third_mins[position]);
+//            viewHolder.txtThird_dest.setText(values_third_dest_eng[position]);
 
-            viewHolder.txtSecond_time.setText(values_second_times[position]);
-            viewHolder.txtSecond_min.setText(values_second_mins[position]);
-            viewHolder.txtSecond_dest.setText(values_second_dest_eng[position]);
 
-            viewHolder.txtThird_time.setText(values_third_times[position]);
-            viewHolder.txtThird_min.setText(values_third_mins[position]);
-            viewHolder.txtThird_dest.setText(values_third_dest_eng[position]);
+        viewHolder.txtFirst_min_desc.setText(R.string.eta_text_min);
+        viewHolder.txtFirst_to.setText(R.string.eta_text_to);
 
+        viewHolder.txtSecond_min_desc.setText(R.string.eta_text_min);
+        viewHolder.txtSecond_to.setText(R.string.eta_text_to);
 
-        viewHolder.txtFirst_min_desc.setText("min");
-        viewHolder.txtFirst_to.setText("To");
-
-        viewHolder.txtSecond_min_desc.setText("min");
-        viewHolder.txtSecond_to.setText("To");
-
-        viewHolder.txtThird_min_desc.setText("min");
-        viewHolder.txtThird_to.setText("To");
+        viewHolder.txtThird_min_desc.setText(R.string.eta_text_min);
+        viewHolder.txtThird_to.setText(R.string.eta_text_to);
 
 
         viewHolder.txtStopSeq.setText(values_stopseq[position]);
@@ -166,7 +167,15 @@ public class ListAdapter_SearchStop extends BaseAdapter
 
         if(values_first_times[position] != null) { //??? New Add
             viewHolder.txtFirst_time.setText(values_first_times[position]);
-            viewHolder.txtFirst_min.setText(values_first_mins[position]);
+//            viewHolder.txtFirst_min.setText(values_first_mins[position]);
+
+            if(Integer.parseInt(values_first_mins[position]) <= 0) {
+                viewHolder.txtFirst_min.setText(R.string.eta_arr_soon);
+                viewHolder.txtFirst_min_desc.setText("");
+            }
+            else
+                viewHolder.txtFirst_min.setText(values_first_mins[position]);
+
 
             if(!values_first_dest_eng[position].equals(""))
                 viewHolder.txtFirst_dest.setText(values_first_dest_eng[position]);
@@ -201,14 +210,19 @@ public class ListAdapter_SearchStop extends BaseAdapter
 
         if(values_second_times[position] != null) { //??? New Add
             viewHolder.txtSecond_time.setText(values_second_times[position]);
-            viewHolder.txtSecond_min.setText(values_second_mins[position]);
+//            viewHolder.txtSecond_min.setText(values_second_mins[position]);
+//            viewHolder.txtSecond_dest.setText(values_second_dest_eng[position]);
 
-            if(!values_second_dest_eng[position].equals(""))
+            if (Integer.parseInt(values_second_mins[position]) <= 0) {
+                viewHolder.txtSecond_min.setText(R.string.eta_arr_soon);
+                viewHolder.txtSecond_min_desc.setText("");
+            } else
+                viewHolder.txtSecond_min.setText(values_second_mins[position]);
+
+            if (!values_second_dest_eng[position].equals(""))
                 viewHolder.txtSecond_dest.setText(values_second_dest_eng[position]);
             else
                 viewHolder.txtSecond_to.setText("");
-
-//            viewHolder.txtSecond_dest.setText(values_second_dest_eng[position]);
         }
         else {
             viewHolder.txtSecond_min_desc.setText("");
@@ -218,19 +232,29 @@ public class ListAdapter_SearchStop extends BaseAdapter
 
         if(values_third_times[position] != null) { //??? New Add
             viewHolder.txtThird_time.setText(values_third_times[position]);
-            viewHolder.txtThird_min.setText(values_third_mins[position]);
+//            viewHolder.txtThird_min.setText(values_third_mins[position]);
+//            viewHolder.txtThird_dest.setText(values_third_dest_eng[position]);
+
+            if(Integer.parseInt(values_third_mins[position]) <= 0) {
+                viewHolder.txtThird_min.setText(R.string.eta_arr_soon);
+                viewHolder.txtThird_min_desc.setText("");
+                System.out.println("199: run when mins <= 0 ");
+            }
+            else {
+                viewHolder.txtThird_min.setText(values_third_mins[position]);
+                System.out.println("199: run when mins > 0 " + values_third_mins[position]);
+            }
 
             if(!values_third_dest_eng[position].equals(""))
                 viewHolder.txtThird_dest.setText(values_third_dest_eng[position]);
             else
                 viewHolder.txtThird_to.setText("");
 
-
-//            viewHolder.txtThird_dest.setText(values_third_dest_eng[position]);
         }
         else {
             viewHolder.txtThird_min_desc.setText("");
             viewHolder.txtThird_to.setText("");
+            System.out.println("199: set txtThird_min_desc.setText('')");
         }
 
 

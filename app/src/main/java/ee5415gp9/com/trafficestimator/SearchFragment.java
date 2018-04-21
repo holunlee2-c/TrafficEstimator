@@ -1,5 +1,6 @@
 package ee5415gp9.com.trafficestimator;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -26,6 +27,8 @@ import java.util.List;
 
 
 public class SearchFragment extends Fragment {
+
+        public static ProgressDialog pDialog;
 
         private TextView emptyView;
         private ListView mListView;
@@ -132,6 +135,15 @@ public class SearchFragment extends Fragment {
                             bundle.putString("source", sources[i]);
 
                             System.out.println("165 : " + lines[i] + " " + bounds[i] + " " + rdvs[i]);
+
+
+                            //Showing "On Loading" to user
+                            pDialog = new ProgressDialog(getActivity());
+                            pDialog.setMessage("Loading... Please wait...");
+                            pDialog.setIndeterminate(false);
+                            pDialog.setCancelable(false);
+                            pDialog.show();
+
 
                             intent.putExtras(bundle);
                             getActivity().startActivity(intent);
