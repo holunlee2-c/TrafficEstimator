@@ -107,14 +107,20 @@ public class ListAdapter_SearchStop extends BaseAdapter
             viewHolder.txtFirst_time = (TextView) convertView.findViewById(R.id.first_time);
             viewHolder.txtFirst_min = (TextView) convertView.findViewById(R.id.first_min);
             viewHolder.txtFirst_dest = (TextView) convertView.findViewById(R.id.first_destination);
+            viewHolder.txtFirst_min_desc = (TextView) convertView.findViewById(R.id.first_min_desc);
+            viewHolder.txtFirst_to = (TextView) convertView.findViewById(R.id.first_to);
 
             viewHolder.txtSecond_time = (TextView) convertView.findViewById(R.id.second_time);
             viewHolder.txtSecond_min = (TextView) convertView.findViewById(R.id.second_min);
             viewHolder.txtSecond_dest = (TextView) convertView.findViewById(R.id.second_destination);
+            viewHolder.txtSecond_min_desc = (TextView) convertView.findViewById(R.id.second_min_desc);
+            viewHolder.txtSecond_to = (TextView) convertView.findViewById(R.id.second_to);
 
             viewHolder.txtThird_time = (TextView) convertView.findViewById(R.id.third_time);
             viewHolder.txtThird_min = (TextView) convertView.findViewById(R.id.third_min);
             viewHolder.txtThird_dest = (TextView) convertView.findViewById(R.id.third_destination);
+            viewHolder.txtThird_min_desc = (TextView) convertView.findViewById(R.id.third_min_desc);
+            viewHolder.txtThird_to = (TextView) convertView.findViewById(R.id.third_to);
 
 
 
@@ -127,6 +133,29 @@ public class ListAdapter_SearchStop extends BaseAdapter
             result=convertView;
         }
 
+            viewHolder.txtFirst_time.setText(values_first_times[position]);
+            viewHolder.txtFirst_min.setText(values_first_mins[position]);
+            viewHolder.txtFirst_dest.setText(values_first_dest_eng[position]);
+
+            viewHolder.txtSecond_time.setText(values_second_times[position]);
+            viewHolder.txtSecond_min.setText(values_second_mins[position]);
+            viewHolder.txtSecond_dest.setText(values_second_dest_eng[position]);
+
+            viewHolder.txtThird_time.setText(values_third_times[position]);
+            viewHolder.txtThird_min.setText(values_third_mins[position]);
+            viewHolder.txtThird_dest.setText(values_third_dest_eng[position]);
+
+
+        viewHolder.txtFirst_min_desc.setText("min");
+        viewHolder.txtFirst_to.setText("To");
+
+        viewHolder.txtSecond_min_desc.setText("min");
+        viewHolder.txtSecond_to.setText("To");
+
+        viewHolder.txtThird_min_desc.setText("min");
+        viewHolder.txtThird_to.setText("To");
+
+
         viewHolder.txtStopSeq.setText(values_stopseq[position]);
         viewHolder.txtStop.setText(values_stop[position]);
 
@@ -134,28 +163,117 @@ public class ListAdapter_SearchStop extends BaseAdapter
         System.out.println("values_first_times[position] " + values_first_times[position]);
 
 
-        viewHolder.txtFirst_time.setText(values_first_times[position]);
-        viewHolder.txtFirst_min.setText(values_first_mins[position]);
-        viewHolder.txtFirst_dest.setText(values_first_dest_eng[position]);
 
-        viewHolder.txtSecond_time.setText(values_second_times[position]);
-        viewHolder.txtSecond_min.setText(values_second_mins[position]);
-        viewHolder.txtSecond_dest.setText(values_second_dest_eng[position]);
+        if(values_first_times[position] != null) { //??? New Add
+            viewHolder.txtFirst_time.setText(values_first_times[position]);
+            viewHolder.txtFirst_min.setText(values_first_mins[position]);
 
-        viewHolder.txtThird_time.setText(values_third_times[position]);
-        viewHolder.txtThird_min.setText(values_third_mins[position]);
-        viewHolder.txtThird_dest.setText(values_third_dest_eng[position]);
+            if(!values_first_dest_eng[position].equals(""))
+                viewHolder.txtFirst_dest.setText(values_first_dest_eng[position]);
+            else
+                viewHolder.txtFirst_to.setText("");
 
 
+//            viewHolder.txtFirst_time.setText(values_first_times[position]);
+//            viewHolder.txtFirst_min.setText(values_first_mins[position]);
+//            viewHolder.txtFirst_dest.setText(values_first_dest_eng[position]);
 
-//        viewHolder.txtDestination.setText(values_dest[position]);
-//        viewHolder.iconMTS.setImageResource(MTSicon_images[position]);
+//            viewHolder.txtSecond_time.setText(values_second_times[position]);
+//            viewHolder.txtSecond_min.setText(values_second_mins[position]);
+//            viewHolder.txtSecond_dest.setText(values_second_dest_eng[position]);
+//
+//            viewHolder.txtThird_time.setText(values_third_times[position]);
+//            viewHolder.txtThird_min.setText(values_third_mins[position]);
+//            viewHolder.txtThird_dest.setText(values_third_dest_eng[position]);
+        }
+        else {
+            viewHolder.txtFirst_min_desc.setText("");
+            viewHolder.txtFirst_to.setText("");
+
+//            viewHolder.txtSecond_min_desc.setText("");
+//            viewHolder.txtSecond_to.setText("");
+//
+//            viewHolder.txtThird_min_desc.setText("");
+//            viewHolder.txtThird_to.setText("");
+        }
+
+
+
+        if(values_second_times[position] != null) { //??? New Add
+            viewHolder.txtSecond_time.setText(values_second_times[position]);
+            viewHolder.txtSecond_min.setText(values_second_mins[position]);
+
+            if(!values_second_dest_eng[position].equals(""))
+                viewHolder.txtSecond_dest.setText(values_second_dest_eng[position]);
+            else
+                viewHolder.txtSecond_to.setText("");
+
+//            viewHolder.txtSecond_dest.setText(values_second_dest_eng[position]);
+        }
+        else {
+            viewHolder.txtSecond_min_desc.setText("");
+            viewHolder.txtSecond_to.setText("");
+        }
+
+
+        if(values_third_times[position] != null) { //??? New Add
+            viewHolder.txtThird_time.setText(values_third_times[position]);
+            viewHolder.txtThird_min.setText(values_third_mins[position]);
+
+            if(!values_third_dest_eng[position].equals(""))
+                viewHolder.txtThird_dest.setText(values_third_dest_eng[position]);
+            else
+                viewHolder.txtThird_to.setText("");
+
+
+//            viewHolder.txtThird_dest.setText(values_third_dest_eng[position]);
+        }
+        else {
+            viewHolder.txtThird_min_desc.setText("");
+            viewHolder.txtThird_to.setText("");
+        }
+
+
+
+
+//            viewHolder.txtSecond_min_desc.setText("");
+//            viewHolder.txtSecond_to.setText("");
+//            viewHolder.txtThird_min_desc.setText("");
+//            viewHolder.txtThird_to.setText("");
+
+
+//            viewHolder.txtFirst_min_desc.setVisibility(View.GONE);
+//            viewHolder.txtFirst_to.setVisibility(View.GONE);
+//            viewHolder.txtSecond_min_desc.setVisibility(View.GONE);
+//            viewHolder.txtSecond_to.setVisibility(View.GONE);
+//            viewHolder.txtThird_min_desc.setVisibility(View.GONE);
+//            viewHolder.txtThird_to.setVisibility(View.GONE);
+
+//            viewHolder.txtFirst_min_desc.setVisibility(View.INVISIBLE);
+//            viewHolder.txtFirst_to.setVisibility(View.INVISIBLE);
+//            viewHolder.txtSecond_min_desc.setVisibility(View.INVISIBLE);
+//            viewHolder.txtSecond_to.setVisibility(View.INVISIBLE);
+//            viewHolder.txtThird_min_desc.setVisibility(View.INVISIBLE);
+//            viewHolder.txtThird_to.setVisibility(View.INVISIBLE);
+
+
+
         return convertView;
     }
     private static class ViewHolder {
 
         TextView txtStopSeq;
         TextView txtStop;
+
+        TextView txtFirst_min_desc;
+        TextView txtFirst_to;
+
+        TextView txtSecond_min_desc;
+        TextView txtSecond_to;
+
+        TextView txtThird_min_desc;
+        TextView txtThird_to;
+
 
         TextView txtFirst_time;
         TextView txtFirst_min;
