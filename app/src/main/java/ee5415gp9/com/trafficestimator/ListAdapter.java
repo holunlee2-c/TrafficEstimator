@@ -77,6 +77,9 @@ public class ListAdapter extends BaseAdapter
             viewHolder = (ViewHolder) convertView.getTag();
             result=convertView;
         }
+
+        viewHolder.txtMinDesc.setText(R.string.eta_text_min);
+
         viewHolder.txtLine.setText(values_line[position]);
         viewHolder.txtDestination.setText(values_dest[position]);
         viewHolder.txtStartpoint.setText(values_startpt[position]);

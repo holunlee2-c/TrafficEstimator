@@ -267,6 +267,15 @@ public class RouteActivity extends AppCompatActivity {
             }
         }
 
+        if (HomeFragment.pDialog != null) {
+            if (HomeFragment.pDialog.isShowing()) {
+                HomeFragment.pDialog.dismiss();
+            }
+            else {
+//                    Log.e(Vars.TAG, "It is NOT SHOWING");
+            }
+        }
+
 
     }
 

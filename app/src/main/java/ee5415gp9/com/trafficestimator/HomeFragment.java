@@ -1,6 +1,8 @@
 package ee5415gp9.com.trafficestimator;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -10,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -35,16 +39,19 @@ public class HomeFragment extends Fragment {
     DatabaseHelper eta_Db;
     DatabaseHelper2 history_Db;
 
+    public static ProgressDialog pDialog;
+
     List<MasterRoutes> mr_list;
     List<MasterStops> ms_list;
 
     int[] ids;
     String[] companies;
     String[] lines;
-//    String[] bounds;
-//    String[] service_types;
-//    String[] rdvs;
-//    String[] eta_ids;
+    String[] bounds;
+    String[] service_types;
+    String[] rdvs;
+    String[] eta_ids;
+
     String[] sources_chi;
     String[] sources_eng;
     String[] dests_chi;
@@ -94,10 +101,10 @@ public class HomeFragment extends Fragment {
         lines = new String[mr_list.size()];
 
 
-//        bounds = new String[mr_list.size()];
-//        service_types = new String[mr_list.size()];
-//        rdvs = new String[mr_list.size()];
-//        eta_ids = new String[mr_list.size()];
+        bounds = new String[mr_list.size()];
+        service_types = new String[mr_list.size()];
+        rdvs = new String[mr_list.size()];
+        eta_ids = new String[mr_list.size()];
 
         sources_chi = new String[mr_list.size()];
         sources_eng = new String[mr_list.size()];
@@ -127,6 +134,10 @@ public class HomeFragment extends Fragment {
             ids[i] = mr_list.get(i).getID();
             companies[i] = mr_list.get(i).getCOMPANY();
             lines[i] = mr_list.get(i).getROUTE();
+            bounds[i] = mr_list.get(i).getBOUND();
+            service_types[i] = mr_list.get(i).getSERVICE_TYPE();
+            rdvs[i] = mr_list.get(i).getRdv();
+            eta_ids[i] = mr_list.get(i).getETA_ID();
 
             sources_chi[i] = mr_list.get(i).getSource_chi();
             sources_eng[i] = mr_list.get(i).getSource_eng();
@@ -206,6 +217,75 @@ public class HomeFragment extends Fragment {
 
         mListView.setAdapter(mListAdapter);
 //        return inflater.inflate(R.layout.fragment_home, container, false);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                //Add into Database
+                history_Db.insertData(ids[i]);
+//                            Cursor cursor = history_Db.getAllData();
+//
+//                            if (cursor.getCount() == 0) {
+//                                    System.out.println("144: No record");
+//                                    return;
+//                            }
+//                            StringBuffer buffer = new StringBuffer();
+//                            while (cursor.moveToNext()) {
+////                                    buffer.append("Id :"+ res.getString(0)+"\n");
+//                                    System.out.println("144 history_db, PK: " + cursor.getString(0));
+//                                    System.out.println("144 history_db, PK_ID: " + cursor.getString(1));
+//                            }
+
+                System.out.println("201: " + ids[i] + ", " + companies[i] + ", " + lines[i] + ", "+ bounds[i]);
+
+
+                //call Route_station Activity
+                Intent intent = new Intent(getActivity(), RouteActivity.class);
+
+                Bundle bundle = new Bundle();
+
+                bundle.putString("company", companies[i]);
+                bundle.putString("line", lines[i]);
+                bundle.putString("bound", bounds[i]);
+                bundle.putString("service_type", service_types[i]);
+                bundle.putString("rdv", rdvs[i]);
+                bundle.putString("eta_id", eta_ids[i]);
+                bundle.putString("dest", dests_eng[i]);
+                bundle.putString("source", sources_eng[i]);
+
+                System.out.println("165 : " + ids[i] + ", " + lines[i] + " " + bounds[i] + " " + rdvs[i]);
+
+
+                //Showing "On Loading" to user
+                pDialog = new ProgressDialog(getActivity());
+                pDialog.setMessage("Loading... Please wait...");
+                pDialog.setIndeterminate(false);
+                pDialog.setCancelable(false);
+                pDialog.show();
+
+
+                intent.putExtras(bundle);
+                getActivity().startActivity(intent);
+
+//                            Intent intent = new Intent(getApplicationContext(), RouteActivity.class);
+//                            Bundle bundle = new Bundle();
+//                            bundle.putString("height", height);
+//                            bundle.putString("weight", weight);
+//                            intent.putExtras(bundle);
+//                            startActivity(intent);
+
+                //****  Display  Toast Message  ****
+                Toast.makeText(getActivity(), companies[i] + " " + lines[i] + ", To: " + dests_eng[i],
+                        Toast.LENGTH_SHORT).show();
+
+                //****  DEFINE THE CLICK ACTION HERE  ****
+            }
+        });
+
+
+
         return view;
     }
 
@@ -213,11 +293,8 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initDatabaseHelper();
-
-
-//        viewAllRecords();
-
     }
+
 
     private void initDatabaseHelper(){
         if(eta_Db == null){
