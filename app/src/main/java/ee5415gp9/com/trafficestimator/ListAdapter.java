@@ -85,7 +85,13 @@ public class ListAdapter extends BaseAdapter
         viewHolder.txtStartpoint.setText(values_startpt[position]);
         viewHolder.textTimeReturn.setText(values_datareturn[position]);
 
-        if(Integer.parseInt(values_minReturn[position]) <= 0) {
+        System.out.println("261: " + values_datareturn[position]);
+
+        if (values_minReturn[position] == null) {
+            viewHolder.txtMinReturn.setText("");
+            viewHolder.txtMinDesc.setText("");
+        }
+        else if(Integer.parseInt(values_minReturn[position]) <= 0) {
             viewHolder.txtMinReturn.setText(R.string.eta_arr_soon);
             viewHolder.txtMinDesc.setText("");
         }
