@@ -119,7 +119,7 @@ public class SearchHistoryFragment extends Fragment {
                     }
                     else if(companies[i].equals("NLB")) {
                         mtsicon[i] = R.drawable.nlb_logo;
-                        mtbg[i] = R.drawable.listitem_newbus;
+                        mtbg[i] = R.drawable.listitem_nlb;
                     }
                     else if(companies[i].equals("CB")) {
                         mtsicon[i] = R.drawable.citybus_logo;

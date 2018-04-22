@@ -126,7 +126,7 @@ public class RouteActivity extends AppCompatActivity {
         }
         else if(company.equals("NLB")) {
             companyIcon.setImageResource(R.drawable.nlb_logo);
-            companyBg.setBackgroundResource(R.drawable.listitem_newbus);
+            companyBg.setBackgroundResource(R.drawable.listitem_nlb);
         }
         else if(company.equals("CB")) {
             companyIcon.setImageResource(R.drawable.citybus_logo);
