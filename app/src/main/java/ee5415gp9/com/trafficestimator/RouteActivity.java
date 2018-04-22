@@ -37,6 +37,7 @@ public class RouteActivity extends AppCompatActivity {
     List<MasterStops> ms_list;
 
     DatabaseHelper eta_Db;
+    DatabaseHelper2 history_Db;
 
     ImageView companyIcon;
     TextView line_textView;
@@ -45,6 +46,17 @@ public class RouteActivity extends AppCompatActivity {
     private ListView mListView;
     public ListAdapter_SearchStop mListAdapter;
 
+    String company;
+    String line;
+    String bound;
+    String service_type;
+    String rdv;
+    String eta_id;
+    String dest;
+    String source;
+
+
+    int[] ids;
     String[] stopseqs;
     String[] stops;
     String[] first_times;
@@ -72,14 +84,23 @@ public class RouteActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
 
-        String company = bundle.getString("company");
-        String line = bundle.getString("line");
-        String bound = bundle.getString("bound");
-        String service_type = bundle.getString("service_type");
-        String rdv = bundle.getString("rdv");
-        String eta_id = bundle.getString("eta_id");
-        String dest = bundle.getString("dest");
-        String source = bundle.getString("source");
+        company = bundle.getString("company");
+        line = bundle.getString("line");
+        bound = bundle.getString("bound");
+        service_type = bundle.getString("service_type");
+        rdv = bundle.getString("rdv");
+        eta_id = bundle.getString("eta_id");
+        dest = bundle.getString("dest");
+        source = bundle.getString("source");
+
+//        String company = bundle.getString("company");
+//        String line = bundle.getString("line");
+//        String bound = bundle.getString("bound");
+//        String service_type = bundle.getString("service_type");
+//        String rdv = bundle.getString("rdv");
+//        String eta_id = bundle.getString("eta_id");
+//        String dest = bundle.getString("dest");
+//        String source = bundle.getString("source");
 
         System.out.println("166: " + company + " " + line + " " + bound + " " + rdv);
 
@@ -113,6 +134,9 @@ public class RouteActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        ids = new int[ms_list.size()];
+
         stopseqs = new String[ms_list.size()];
         stops = new String[ms_list.size()];
 
@@ -129,6 +153,7 @@ public class RouteActivity extends AppCompatActivity {
         third_dest_eng = new String[ms_list.size()];
 
         for(int i = 0; i < ms_list.size(); i++) {
+            ids[i] = ms_list.get(i).getID();
             stopseqs[i] = String.valueOf(i +1) ;
             stops[i] = ms_list.get(i).getEng_name();
 
@@ -158,15 +183,15 @@ public class RouteActivity extends AppCompatActivity {
 //            }
 //        }
 
-//        registerForContextMenu(mListView);
+        registerForContextMenu(mListView);
 
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> a, View v, int position,
-                                    long id) {
-                this.openCreateContextMenu(v);
-            }
-        });
+//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> a, View v, int position,
+//                                    long id) {
+//                this.openCreateContextMenu(this);
+//            }
+//        });
     }
 
 
@@ -181,12 +206,30 @@ public class RouteActivity extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position; //Returned StopSeq
+
+
         switch (item.getItemId()) {
-            case R.id.menuItemWelcome:
-//                mOutEditText.setText( this.getResources().getText( R.string.welcome_msg) );
-                System.out.println("");
+            case R.id.add_favourite:
+                System.out.println("202, menuid :" + index);
+                System.out.println("203, menu - stopid :" + ids[index]);
+
+                history_Db.insertData_favourite(ids[index]);
+
+                Cursor cursor = history_Db.getFavouriteAllData();
+
+                while (cursor.moveToNext()) {
+                    int id = cursor.getInt(0);
+                    int pk_id = cursor.getInt(1);
+
+                    System.out.println("205: " + id + ", " + pk_id);
+                }
+
                 return true;
             case R.id.menuItemAbout:
+                System.out.println("202, menu :" + index);
+
 //                mOutEditText.setText( this.getResources().getText( R.string.about_msg) );
                 System.out.println("");
                 return true;
@@ -217,6 +260,10 @@ public class RouteActivity extends AppCompatActivity {
     private void initDatabaseHelper(){
         if(eta_Db == null){
             eta_Db = new DatabaseHelper(this);
+        }
+
+        if(history_Db == null){
+            history_Db = new DatabaseHelper2(this);
         }
     }
 
