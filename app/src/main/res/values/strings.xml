@@ -21,7 +21,10 @@
     <string name="option_About_us_text">This app is made by EE5415 Group 9 Students (Kimi Chan, Antony Chau and James Lee).</string>
     <string name="option_About_us_ok">Ok</string>
     <string name="option_Refresh_DB_title">Refresh Database</string>
+    <string name="option_Refresh_DB_no_wifi_title">No Wifi Connectection</string>
+    <string name="option_Refresh_DB_no_wifi">You should refresh the data through Wifi Connection.</string>
     <string name="option_exit_title">Exit</string>
+
 
 
     <string name="contextMenu_addFavourite">Add Favourite</string>

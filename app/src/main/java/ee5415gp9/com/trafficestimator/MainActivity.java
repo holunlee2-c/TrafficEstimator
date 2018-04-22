@@ -388,6 +388,8 @@ public class MainActivity extends AppCompatActivity{
                     System.out.println("Deleted database : " + deleted);
                     checkConnectedWifiAndDownload();
                 }
+                else
+                    openOptionsDialog2();
 
                 return true;
             case R.id.option_exit:
@@ -408,6 +410,19 @@ public class MainActivity extends AppCompatActivity{
                             }
                         }).show();
     }
+
+    public void openOptionsDialog2() {
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle(R.string.option_Refresh_DB_no_wifi_title)
+                .setMessage(R.string.option_Refresh_DB_no_wifi)
+                .setPositiveButton(R.string.option_About_us_ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialoginterface, int i) {
+                            }
+                        }).show();
+    }
+
 
 
     public boolean deleteDatabase()
