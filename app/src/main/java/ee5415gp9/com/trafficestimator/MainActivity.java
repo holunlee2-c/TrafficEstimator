@@ -258,14 +258,60 @@ public class MainActivity extends AppCompatActivity{
 //        new DownloadFileFromURL().execute(onlineDB_LINK);
 
         //If Connected Wifi, download and update the DB
+        checkConnectedWifiAndDownload();
+
+//        ConnectivityManager connManager = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+//        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+//
+//        if (mWifi.isConnected()) {
+//            new DownloadFileFromURL().execute(onlineDB_LINK);
+//        }
+
+        //If no connection, return AlertDialog
+        checkNetworkConn();
+        checkConnectedWifiAndDownload();
+
+//        ConnectivityManager cm =
+//                (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+//        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+////        return netInfo != null && netInfo.isConnectedOrConnecting();
+////        if (netInfo == null && !netInfo.isConnectedOrConnecting())
+////            checkNetWorkConn();
+//
+//        if (cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isAvailable() && cm.getActiveNetworkInfo().isConnected()) {
+//        }
+//        else
+//            returnNoNetWorkConn();
+
+    }
+
+    public boolean checkConnectedWifi() {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-        if (mWifi.isConnected()) {
+//        if (mWifi.isConnected()) {
+//            return true;
+//        }
+        return mWifi.isConnected();
+    }
+
+    public void checkConnectedWifiAndDownload()
+    {
+        ConnectivityManager connManager = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+        String filePath =  "/data/data/"
+                +getApplicationContext().getPackageName()
+                + "/databases/" + storedDB_NAME;
+        File file = new File(filePath);
+
+        if (mWifi.isConnected() && !file.exists() ) {
             new DownloadFileFromURL().execute(onlineDB_LINK);
         }
+    }
 
-        //If no connection, return AlertDialog
+    public void checkNetworkConn()
+    {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -278,6 +324,7 @@ public class MainActivity extends AppCompatActivity{
         else
             returnNoNetWorkConn();
     }
+
 
     public void returnNoNetWorkConn()
     {
@@ -310,6 +357,65 @@ public class MainActivity extends AppCompatActivity{
 
         // show it
         alertDialog.show();
+
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+// Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_options, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.option_About_us:
+                openOptionsDialog();
+                return true;
+            case R.id.option_Refresh_DB_title:
+//                Intent intent = new Intent(Intent.ACTION_VIEW,
+//                        Uri.parse("http://en.wikipedia.org/wiki/Body_mass_index"));
+//                startActivity(intent);
+
+                if(checkConnectedWifi()) {
+                    boolean deleted = deleteDatabase();
+                    System.out.println("Deleted database : " + deleted);
+                    checkConnectedWifiAndDownload();
+                }
+
+                return true;
+            case R.id.option_exit:
+                finish();
+                return true;
+        }
+        return false;
+    }
+
+    public void openOptionsDialog() {
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle(R.string.option_About_us_title)
+                .setMessage(R.string.option_About_us_text)
+                .setPositiveButton(R.string.option_About_us_ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialoginterface, int i) {
+                            }
+                        }).show();
+    }
+
+
+    public boolean deleteDatabase()
+    {
+        String inFileName =  "/data/data/"
+                +getApplicationContext().getPackageName()
+                + "/databases/" + storedDB_NAME;
+
+        File file = new File(inFileName);
+        boolean deleted = file.delete();
+
+        return deleted;
     }
 
 
@@ -397,9 +503,9 @@ public class MainActivity extends AppCompatActivity{
          * **/
         @Override
         protected void onPostExecute(String file_url) {
-            System.out.println("Downloaded");
 
             pDialog.dismiss();
+            System.out.println("Downloaded");
         }
 
     }

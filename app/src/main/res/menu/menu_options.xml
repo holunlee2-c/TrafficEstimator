@@ -12,5 +12,11 @@
     <item
         android:id="@+id/option_About_us"
         android:title="@string/option_About_us_title"
-        android:orderInCategory="100" />
+        android:orderInCategory="2" />
+
+    <item
+        android:id="@+id/option_exit"
+        android:title="@string/option_exit_title"
+        android:orderInCategory="3"
+        />
 </menu>

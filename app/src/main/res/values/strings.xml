@@ -18,8 +18,10 @@
 
 
     <string name="option_About_us_title">About Us</string>
-    <string name="option_About_us_text">This app is made by EE5415 Group 9 Students (Kimi Chan, Antony Chau, James Lee).</string>
+    <string name="option_About_us_text">This app is made by EE5415 Group 9 Students (Kimi Chan, Antony Chau and James Lee).</string>
+    <string name="option_About_us_ok">Ok</string>
     <string name="option_Refresh_DB_title">Refresh Database</string>
+    <string name="option_exit_title">Exit</string>
 
 
     <string name="contextMenu_addFavourite">Add Favourite</string>
@@ -31,48 +33,50 @@
 
     <string name="toDescription">To</string>
 
-    <string name="destin_01">Wan Chai</string>
-    <string name="destin_02">Tseun Wan</string>
-    <string name="destin_03">HK International Airport</string>
-    <string name="destin_04">Terminal 1</string>
-    <string name="destin_05">Terminal 2</string>
-    <string name="destin_06">Terminal 3</string>
 
-    <string-array name="destination_array">
-        <item>Hung Hom</item>
-        <item>Airport-Terminal 1</item>
-        <item>Kowloon</item>
-        <item>Mong Kok</item>
-        <item>Hong Kong</item>
-        <item>Kowloon</item>
-    </string-array>
 
-    <string-array name="stoppoint_array">
-        <item>City University</item>
-        <item>Kowloon Tong Station</item>
-        <item>Kowloon Tong Station</item>
-        <item>City Two</item>
-        <item>City University</item>
-        <item>City University</item>
-    </string-array>
+    <!--<string name="destin_01">Wan Chai</string>-->
+    <!--<string name="destin_02">Tseun Wan</string>-->
+    <!--<string name="destin_03">HK International Airport</string>-->
+    <!--<string name="destin_04">Terminal 1</string>-->
+    <!--<string name="destin_05">Terminal 2</string>-->
+    <!--<string name="destin_06">Terminal 3</string>-->
 
-    <string-array name="line_array">
-        <item>Line</item>
-        <item>Line</item>
-        <item>Line</item>
-        <item>Line</item>
-        <item>Line</item>
-        <item>Line</item>
-    </string-array>
+    <!--<string-array name="destination_array">-->
+        <!--<item>Hung Hom</item>-->
+        <!--<item>Airport-Terminal 1</item>-->
+        <!--<item>Kowloon</item>-->
+        <!--<item>Mong Kok</item>-->
+        <!--<item>Hong Kong</item>-->
+        <!--<item>Kowloon</item>-->
+    <!--</string-array>-->
 
-    <string-array name="datareturn_array">
-        <item>00:04</item>
-        <item>00:04</item>
-        <item>00:04</item>
-        <item>00:04</item>
-        <item>00:04</item>
-        <item>00:04</item>
-    </string-array>
+    <!--<string-array name="stoppoint_array">-->
+        <!--<item>City University</item>-->
+        <!--<item>Kowloon Tong Station</item>-->
+        <!--<item>Kowloon Tong Station</item>-->
+        <!--<item>City Two</item>-->
+        <!--<item>City University</item>-->
+        <!--<item>City University</item>-->
+    <!--</string-array>-->
+
+    <!--<string-array name="line_array">-->
+        <!--<item>Line</item>-->
+        <!--<item>Line</item>-->
+        <!--<item>Line</item>-->
+        <!--<item>Line</item>-->
+        <!--<item>Line</item>-->
+        <!--<item>Line</item>-->
+    <!--</string-array>-->
+
+    <!--<string-array name="datareturn_array">-->
+        <!--<item>00:04</item>-->
+        <!--<item>00:04</item>-->
+        <!--<item>00:04</item>-->
+        <!--<item>00:04</item>-->
+        <!--<item>00:04</item>-->
+        <!--<item>00:04</item>-->
+    <!--</string-array>-->
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
