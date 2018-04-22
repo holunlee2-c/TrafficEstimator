@@ -17,6 +17,11 @@
     <string name="eta_text_to">To</string>
 
 
+    <string name="option_About_us_title">About Us</string>
+    <string name="option_About_us_text">This app is made by EE5415 Group 9 Students (Kimi Chan, Antony Chau, James Lee).</string>
+    <string name="option_Refresh_DB_title">Refresh Database</string>
+
+
     <string name="contextMenu_addFavourite">Add Favourite</string>
     <string name="contextMenu_deleteFavourite">Delete Favourite</string>
     <string name="test">Test</string>

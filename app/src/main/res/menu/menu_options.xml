@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/option_Refresh_DB_title"
+        android:title="@string/option_Refresh_DB_title"
+        android:orderInCategory="1" />
+
+    <item
+        android:id="@+id/option_About_us"
+        android:title="@string/option_About_us_title"
+        android:orderInCategory="100" />
+</menu>

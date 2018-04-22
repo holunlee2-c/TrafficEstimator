@@ -25,7 +25,7 @@
 
         <TextView
             android:id="@+id/emptyView"
-            android:text="@string/search_no_route"
+            android:text="@string/history_no_route"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
