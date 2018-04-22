@@ -11,6 +11,7 @@
     <string name="search_button">Search</string>
     <string name="search_no_route">No Routes Found!</string>
     <string name="history_no_route">No Search History Found!</string>
+    <string name="favourite_no_route">No Favourite Route Found!</string>
     <string name="eta_arr_soon">Arr / Dept</string>
     <string name="eta_text_min">min</string>
     <string name="eta_text_to">To</string>
