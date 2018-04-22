@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -79,6 +80,8 @@ public class HomeFragment extends Fragment {
 //    String[] third_dest_eng;
 
 
+    private TextView emptyView;
+
     private ListView mListView;
     public ListAdapter mListAdapter;
 
@@ -98,6 +101,19 @@ public class HomeFragment extends Fragment {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
+        FrameLayout view = (FrameLayout) inflater.inflate(R.layout.fragment_home, container, false);
+
+        emptyView = (TextView) view.findViewById(R.id.emptyView);
+        mListView = (ListView) view.findViewById(R.id.listview);
+
+
+
+        if(mr_list.size() >= 1) {
+            System.out.println("208: null" + mr_list.size());
+            mListView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
 
         ids = new int[mr_list.size()];
         companies = new String[mr_list.size()];
@@ -186,33 +202,13 @@ public class HomeFragment extends Fragment {
             first_mins[i] = ms_list.get(i).getFirst_min();
             first_dest_eng[i] = ms_list.get(i).getFirst_dest_eng();
 
-//            second_times[i] = ms_list.get(i).getSecond_time();
-//            second_mins[i] = ms_list.get(i).getSecond_min();
-//            second_dest_eng[i] = ms_list.get(i).getSecond_dest_eng();
-//
-//            third_times[i] = ms_list.get(i).getThird_time();
-//            third_mins[i] = ms_list.get(i).getThird_min();
-//            third_dest_eng[i] = ms_list.get(i).getThird_dest_eng();
         }
 
 
-//        final String[] lines = getResources().getStringArray(R.array.line_array);
-//        final String[] destinations = getResources().getStringArray(R.array.destination_array);
-//        final String[] startpoints = getResources().getStringArray(R.array.stoppoint_array);
-//        final String[] datareturn = getResources().getStringArray(R.array.datareturn_array);
-//        final int[] mtsicon = {
-//                R.drawable.mtr_logo_wordmark, R.drawable.kmb_logo, R.drawable.lwb_logo,
-//                R.drawable.citybus_logo, R.drawable.kmb_logo, R.drawable.citybus_logo };
-//        final int[] mtsbg = {
-//                R.drawable.listitem_mtr, R.drawable.listitem_kmb, R.drawable.listitem_lwb,
-//                R.drawable.listitem_citybus, R.drawable.listitem_kmb, R.drawable.listitem_citybus };
-
-
-
-
-        FrameLayout view = (FrameLayout) inflater.inflate(R.layout.fragment_home, container, false);
-
-        mListView = (ListView) view.findViewById(R.id.listview);
+//        FrameLayout view = (FrameLayout) inflater.inflate(R.layout.fragment_home, container, false);
+//
+//        emptyView = (TextView) view.findViewById(R.id.emptyView);
+//        mListView = (ListView) view.findViewById(R.id.listview);
       //  mListView.setBackgroundResource(R.drawable.background);
 
         mListAdapter = new ListAdapter(getActivity(), lines, dests_eng, eng_name, first_times, first_mins, mtsicon, mtbg);
@@ -288,9 +284,28 @@ public class HomeFragment extends Fragment {
         });
 
 
-        registerForContextMenu(mListView);
 
-        return view;
+
+            registerForContextMenu(mListView);
+            return view;
+
+        }
+        else
+        {
+//            FrameLayout view = (FrameLayout) inflater.inflate(R.layout.fragment_search_history, container, false);
+            System.out.println("208a: null" + mr_list.size());
+            emptyView = (TextView) view.findViewById(R.id.emptyView);
+            mListView = (ListView) view.findViewById(R.id.listview);
+
+            emptyView.setVisibility(View.VISIBLE);
+            mListView.setVisibility(View.GONE);
+
+            return view;
+        }
+
+
+
+//        return view;
     }
 
     @Override
@@ -682,88 +697,100 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
 
-        ids = new int[mr_list.size()];
-        companies = new String[mr_list.size()];
-        lines = new String[mr_list.size()];
+        if(mr_list.size() >= 1  && ms_list.size() >= 1) {
+            System.out.println("209: null" + mr_list.size());
+
+            mListView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+
+            ids = new int[mr_list.size()];
+            companies = new String[mr_list.size()];
+            lines = new String[mr_list.size()];
 
 
-        bounds = new String[mr_list.size()];
-        service_types = new String[mr_list.size()];
-        rdvs = new String[mr_list.size()];
-        eta_ids = new String[mr_list.size()];
+            bounds = new String[mr_list.size()];
+            service_types = new String[mr_list.size()];
+            rdvs = new String[mr_list.size()];
+            eta_ids = new String[mr_list.size()];
 
-        sources_chi = new String[mr_list.size()];
-        sources_eng = new String[mr_list.size()];
-        dests_chi = new String[mr_list.size()];
-        dests_eng = new String[mr_list.size()];
+            sources_chi = new String[mr_list.size()];
+            sources_eng = new String[mr_list.size()];
+            dests_chi = new String[mr_list.size()];
+            dests_eng = new String[mr_list.size()];
 
-        chi_name = new String[ms_list.size()];
-        eng_name = new String[ms_list.size()];
+            chi_name = new String[ms_list.size()];
+            eng_name = new String[ms_list.size()];
 
-        first_times = new String[ms_list.size()];
-        first_mins = new String[ms_list.size()];
-        first_dest_eng = new String[ms_list.size()];
+            first_times = new String[ms_list.size()];
+            first_mins = new String[ms_list.size()];
+            first_dest_eng = new String[ms_list.size()];
 
-        int[] mtsicon = new int[mr_list.size()];
-        int[] mtbg = new int[mr_list.size()];
+            int[] mtsicon = new int[mr_list.size()];
+            int[] mtbg = new int[mr_list.size()];
 
 
-        for(int i = 0; i < mr_list.size(); i++) {
-            ids[i] = mr_list.get(i).getID();
-            companies[i] = mr_list.get(i).getCOMPANY();
-            lines[i] = mr_list.get(i).getROUTE();
-            bounds[i] = mr_list.get(i).getBOUND();
-            service_types[i] = mr_list.get(i).getSERVICE_TYPE();
-            rdvs[i] = mr_list.get(i).getRdv();
-            eta_ids[i] = mr_list.get(i).getETA_ID();
+            for(int i = 0; i < mr_list.size(); i++) {
+                ids[i] = mr_list.get(i).getID();
+                companies[i] = mr_list.get(i).getCOMPANY();
+                lines[i] = mr_list.get(i).getROUTE();
+                bounds[i] = mr_list.get(i).getBOUND();
+                service_types[i] = mr_list.get(i).getSERVICE_TYPE();
+                rdvs[i] = mr_list.get(i).getRdv();
+                eta_ids[i] = mr_list.get(i).getETA_ID();
 
-            sources_chi[i] = mr_list.get(i).getSource_chi();
-            sources_eng[i] = mr_list.get(i).getSource_eng();
-            dests_chi[i] = mr_list.get(i).getDest_chi();
-            dests_eng[i] = mr_list.get(i).getDest_eng();
+                sources_chi[i] = mr_list.get(i).getSource_chi();
+                sources_eng[i] = mr_list.get(i).getSource_eng();
+                dests_chi[i] = mr_list.get(i).getDest_chi();
+                dests_eng[i] = mr_list.get(i).getDest_eng();
 
-            if(companies[i].equals("KMB")) {
-                mtsicon[i] = R.drawable.kmb_logo;
-                mtbg[i] = R.drawable.listitem_kmb;
+                if(companies[i].equals("KMB")) {
+                    mtsicon[i] = R.drawable.kmb_logo;
+                    mtbg[i] = R.drawable.listitem_kmb;
+                }
+                else if(companies[i].equals("LWB")) {
+                    mtsicon[i] = R.drawable.lwb_logo;
+                    mtbg[i] = R.drawable.listitem_lwb;
+                }
+                else if(companies[i].equals("MTR")) {
+                    mtsicon[i] = R.drawable.mtr_logo_wordmark;
+                    mtbg[i] = R.drawable.listitem_mtr;
+                }
+                else if(companies[i].equals("NWFB")) {
+                    mtsicon[i] = R.drawable.newbus_logo;
+                    mtbg[i] = R.drawable.listitem_newbus;
+                }
+                else if(companies[i].equals("NLB")) {
+                    mtsicon[i] = R.drawable.nlb_logo;
+                    mtbg[i] = R.drawable.listitem_newbus;
+                }
+                else if(companies[i].equals("CB")) {
+                    mtsicon[i] = R.drawable.citybus_logo;
+                    mtbg[i] = R.drawable.listitem_citybus;
+                }
             }
-            else if(companies[i].equals("LWB")) {
-                mtsicon[i] = R.drawable.lwb_logo;
-                mtbg[i] = R.drawable.listitem_lwb;
+
+
+            for(int i = 0; i < ms_list.size(); i++) {
+
+                chi_name[i] = ms_list.get(i).getChi_name();
+                eng_name[i] = ms_list.get(i).getEng_name();
+
+                first_times[i] = ms_list.get(i).getFirst_time();
+                first_mins[i] = ms_list.get(i).getFirst_min();
+                first_dest_eng[i] = ms_list.get(i).getFirst_dest_eng();
+
             }
-            else if(companies[i].equals("MTR")) {
-                mtsicon[i] = R.drawable.mtr_logo_wordmark;
-                mtbg[i] = R.drawable.listitem_mtr;
-            }
-            else if(companies[i].equals("NWFB")) {
-                mtsicon[i] = R.drawable.newbus_logo;
-                mtbg[i] = R.drawable.listitem_newbus;
-            }
-            else if(companies[i].equals("NLB")) {
-                mtsicon[i] = R.drawable.nlb_logo;
-                mtbg[i] = R.drawable.listitem_newbus;
-            }
-            else if(companies[i].equals("CB")) {
-                mtsicon[i] = R.drawable.citybus_logo;
-                mtbg[i] = R.drawable.listitem_citybus;
-            }
+
+
+            mListAdapter = new ListAdapter(getActivity(), lines, dests_eng, eng_name, first_times, first_mins, mtsicon, mtbg);
+            mListView.setAdapter(mListAdapter);
+            mListAdapter.notifyDataSetChanged();
         }
-
-
-        for(int i = 0; i < ms_list.size(); i++) {
-
-            chi_name[i] = ms_list.get(i).getChi_name();
-            eng_name[i] = ms_list.get(i).getEng_name();
-
-            first_times[i] = ms_list.get(i).getFirst_time();
-            first_mins[i] = ms_list.get(i).getFirst_min();
-            first_dest_eng[i] = ms_list.get(i).getFirst_dest_eng();
-
+        else {
+            System.out.println("209: null" + mr_list.size());
+            mListView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
         }
-
-
-        mListAdapter = new ListAdapter(getActivity(), lines, dests_eng, eng_name, first_times, first_mins, mtsicon, mtbg);
-        mListView.setAdapter(mListAdapter);
-        mListAdapter.notifyDataSetChanged();
     }
 
 }
