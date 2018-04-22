@@ -2,6 +2,8 @@ package ee5415gp9.com.trafficestimator;
 
 import android.app.ProgressDialog;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -82,6 +84,8 @@ public class RouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
         ActionBar actionBar = getSupportActionBar();
+        BitmapDrawable background = new BitmapDrawable (BitmapFactory.decodeResource(getResources(), R.drawable.top_banna));
+        actionBar.setBackgroundDrawable(background);
         actionBar.setDisplayShowTitleEnabled(false);
         initDatabaseHelper();
 

@@ -5,17 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@drawable/background"
     tools:context=".RouteActivity">
-
-    <ImageView
-        android:id="@+id/top_banna"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:adjustViewBounds="true"
-        android:src="@drawable/top_banna" />
 
     <ImageView
         android:id="@+id/companybg"
@@ -23,7 +14,6 @@
         android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        app:layout_constraintTop_toBottomOf="@+id/top_banna"
         android:adjustViewBounds="true"    />
 
     <ImageView
@@ -32,7 +22,6 @@
         android:layout_height="50dp"
         android:padding="10dp"
         android:adjustViewBounds="true"
-        app:layout_constraintTop_toBottomOf="@+id/top_banna"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
 
@@ -46,8 +35,6 @@
         android:layout_marginRight="4dp"
         android:gravity="center_vertical|center_horizontal"
         android:text="Line"
-        app:layout_constraintTop_toBottomOf="@+id/top_banna"
-
         android:textSize="20sp" />
 
 
