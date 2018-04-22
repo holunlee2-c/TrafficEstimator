@@ -9,7 +9,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -285,9 +288,47 @@ public class HomeFragment extends Fragment {
         });
 
 
+        registerForContextMenu(mListView);
 
         return view;
     }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_home, menu);
+    }
+
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position; //Returned StopSeq
+
+
+        switch (item.getItemId()) {
+            case R.id.delete_favourite:
+                System.out.println("202, menuid :" + index);
+                System.out.println("203, menu - stopid :" + ids[index]);
+
+                int deleted_item = history_Db.deleteFavourite(String.valueOf(ids[index]));
+                System.out.println("204 : " + deleted_item);
+
+                updatedData();
+                mListAdapter.notifyDataSetChanged();
+
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -621,6 +662,109 @@ public class HomeFragment extends Fragment {
 
     }
 
+    public void updatedData()
+    {
+        //Clear Arraylist before refreshing data
+        if(mr_list != null) {
+            mr_list.clear();
+        }
+
+        if(ms_list != null) {
+            ms_list.clear();
+        }
+
+        mr_list = viewAllFavouriteRecords();
+        try {
+            ms_list = viewAllFavouriteRecords2();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ids = new int[mr_list.size()];
+        companies = new String[mr_list.size()];
+        lines = new String[mr_list.size()];
+
+
+        bounds = new String[mr_list.size()];
+        service_types = new String[mr_list.size()];
+        rdvs = new String[mr_list.size()];
+        eta_ids = new String[mr_list.size()];
+
+        sources_chi = new String[mr_list.size()];
+        sources_eng = new String[mr_list.size()];
+        dests_chi = new String[mr_list.size()];
+        dests_eng = new String[mr_list.size()];
+
+        chi_name = new String[ms_list.size()];
+        eng_name = new String[ms_list.size()];
+
+        first_times = new String[ms_list.size()];
+        first_mins = new String[ms_list.size()];
+        first_dest_eng = new String[ms_list.size()];
+
+        int[] mtsicon = new int[mr_list.size()];
+        int[] mtbg = new int[mr_list.size()];
+
+
+        for(int i = 0; i < mr_list.size(); i++) {
+            ids[i] = mr_list.get(i).getID();
+            companies[i] = mr_list.get(i).getCOMPANY();
+            lines[i] = mr_list.get(i).getROUTE();
+            bounds[i] = mr_list.get(i).getBOUND();
+            service_types[i] = mr_list.get(i).getSERVICE_TYPE();
+            rdvs[i] = mr_list.get(i).getRdv();
+            eta_ids[i] = mr_list.get(i).getETA_ID();
+
+            sources_chi[i] = mr_list.get(i).getSource_chi();
+            sources_eng[i] = mr_list.get(i).getSource_eng();
+            dests_chi[i] = mr_list.get(i).getDest_chi();
+            dests_eng[i] = mr_list.get(i).getDest_eng();
+
+            if(companies[i].equals("KMB")) {
+                mtsicon[i] = R.drawable.kmb_logo;
+                mtbg[i] = R.drawable.listitem_kmb;
+            }
+            else if(companies[i].equals("LWB")) {
+                mtsicon[i] = R.drawable.lwb_logo;
+                mtbg[i] = R.drawable.listitem_lwb;
+            }
+            else if(companies[i].equals("MTR")) {
+                mtsicon[i] = R.drawable.mtr_logo_wordmark;
+                mtbg[i] = R.drawable.listitem_mtr;
+            }
+            else if(companies[i].equals("NWFB")) {
+                mtsicon[i] = R.drawable.newbus_logo;
+                mtbg[i] = R.drawable.listitem_newbus;
+            }
+            else if(companies[i].equals("NLB")) {
+                mtsicon[i] = R.drawable.nlb_logo;
+                mtbg[i] = R.drawable.listitem_newbus;
+            }
+            else if(companies[i].equals("CB")) {
+                mtsicon[i] = R.drawable.citybus_logo;
+                mtbg[i] = R.drawable.listitem_citybus;
+            }
+        }
+
+
+        for(int i = 0; i < ms_list.size(); i++) {
+
+            chi_name[i] = ms_list.get(i).getChi_name();
+            eng_name[i] = ms_list.get(i).getEng_name();
+
+            first_times[i] = ms_list.get(i).getFirst_time();
+            first_mins[i] = ms_list.get(i).getFirst_min();
+            first_dest_eng[i] = ms_list.get(i).getFirst_dest_eng();
+
+        }
+
+
+        mListAdapter = new ListAdapter(getActivity(), lines, dests_eng, eng_name, first_times, first_mins, mtsicon, mtbg);
+        mListView.setAdapter(mListAdapter);
+        mListAdapter.notifyDataSetChanged();
+    }
 
 }
 

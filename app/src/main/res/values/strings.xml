@@ -17,6 +17,7 @@
 
 
     <string name="contextMenu_addFavourite">Add Favourite</string>
+    <string name="contextMenu_deleteFavourite">Delete Favourite</string>
     <string name="test">Test</string>
 
 

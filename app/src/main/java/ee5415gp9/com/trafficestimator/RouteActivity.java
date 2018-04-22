@@ -241,12 +241,6 @@ public class RouteActivity extends AppCompatActivity {
                 }
 
                 return true;
-            case R.id.menuItemAbout:
-                System.out.println("202, menu :" + index);
-
-//                mOutEditText.setText( this.getResources().getText( R.string.about_msg) );
-                System.out.println("");
-                return true;
             default:
                 return super.onContextItemSelected(item);
         }

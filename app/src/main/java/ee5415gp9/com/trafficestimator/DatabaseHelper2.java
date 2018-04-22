@@ -92,9 +92,16 @@ public class DatabaseHelper2 extends SQLiteOpenHelper {
         db.update(TABLE_HISTORY, contentValues, "ID = ?", new String[] {id});
         return true;
     }
+
     // Method to delete a record
-    public Integer deleteData (String id) {
+    public Integer deleteData(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_HISTORY, "ID = ?", new String[] {id});
+    }
+
+    // Method to delete a record
+    public Integer deleteFavourite(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_FAVOURITE, "pk_from_master = ?", new String[] {id});
     }
 }
