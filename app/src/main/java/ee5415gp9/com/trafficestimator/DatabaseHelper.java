@@ -275,17 +275,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getRouteStop_Search(String company, String route, String bound, String service_type, String rdv) {
         SQLiteDatabase db = this.getWritableDatabase();
 //        Cursor res = db.rawQuery("select * from " + TABLE_ROUTES, null);
+
         String sql =
                 "select * " +
-                "from " + TABLE_STOPS + " " +
-                "where company LIKE '" + company + "' " +
-                "AND " +
-                "(route = '" + route + "' AND bound = '" + bound + "' AND service_type = '" + service_type + "' " +
-                "OR " +
-                "route = '" + route + "' AND bound = '" + bound + "' " +
-                "OR " +
-                "rdv = '" + rdv + "') " +
-                "ORDER BY CAST(stopseq AS INTEGER)";
+                        "from " + TABLE_STOPS + " " +
+                        "where company LIKE '" + company + "' " +
+                        "AND " +
+                        "(route = '" + route + "' AND bound = '" + bound + "' AND service_type = '" + service_type + "') " +
+                        "OR " +
+                        "(route = '" + route + "' AND bound = '" + bound + "' AND service_type IS NULL ) " +
+                        "OR " +
+                        "rdv = '" + rdv + "' " +
+                        "ORDER BY CAST(stopseq AS INTEGER)";
+
+//        String sql =
+//                "select * " +
+//                "from " + TABLE_STOPS + " " +
+//                "where company LIKE '" + company + "' " +
+//                "AND " +
+//                "(route = '" + route + "' AND bound = '" + bound + "' AND service_type = '" + service_type + "' " +
+//                "OR " +
+//                "route = '" + route + "' AND bound = '" + bound + "' " +
+//                "OR " +
+//                "rdv = '" + rdv + "') " +
+//                "ORDER BY CAST(stopseq AS INTEGER)";
 
         System.out.println("668 :" + sql);
 
