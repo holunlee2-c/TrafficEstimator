@@ -33,7 +33,7 @@ public class RouteActivity extends AppCompatActivity {
 
     DatabaseHelper eta_Db;
 
-    ImageView companyIcon;
+    ImageView companyIcon, companyBg;
     TextView line_textView;
     TextView destinationTxt;
 
@@ -80,19 +80,33 @@ public class RouteActivity extends AppCompatActivity {
 
 
         companyIcon = (ImageView) findViewById(R.id.companyIcon);
+        companyBg = (ImageView) findViewById(R.id.companybg);
 
-        if(company.equals("KMB"))
+        if(company.equals("KMB")) {
             companyIcon.setImageResource(R.drawable.kmb_logo);
-        else if(company.equals("LWB"))
+            companyBg.setBackgroundResource(R.drawable.listitem_kmb);
+        }
+        else if(company.equals("LWB")) {
             companyIcon.setImageResource(R.drawable.lwb_logo);
-        else if(company.equals("MTR"))
-            companyIcon.setImageResource(R.drawable.mtr_logo);
-        else if(company.equals("NWFB"))
+            companyBg.setBackgroundResource(R.drawable.listitem_lwb);
+        }
+        else if(company.equals("MTR")) {
+            companyIcon.setImageResource(R.drawable.mtr_logo_wordmark);
+            companyBg.setBackgroundResource(R.drawable.listitem_mtr);
+        }
+        else if(company.equals("NWFB")) {
             companyIcon.setImageResource(R.drawable.newbus_logo);
-        else if(company.equals("NLB"))
+            companyBg.setBackgroundResource(R.drawable.listitem_newbus);
+        }
+        else if(company.equals("NLB")) {
             companyIcon.setImageResource(R.drawable.nlb_logo);
-        else if(company.equals("CB"))
+            companyBg.setBackgroundResource(R.drawable.listitem_newbus);
+        }
+        else if(company.equals("CB")) {
             companyIcon.setImageResource(R.drawable.citybus_logo);
+            companyBg.setBackgroundResource(R.drawable.listitem_citybus);
+        }
+
 
         line_textView = (TextView) findViewById(R.id.Line);
         destinationTxt = (TextView) findViewById(R.id.destinationTxt);

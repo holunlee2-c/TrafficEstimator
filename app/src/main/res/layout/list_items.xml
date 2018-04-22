@@ -3,19 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp">
+    android:padding="1dp">
+
+    <ImageView
+        android:id="@+id/aMTSbg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/listitem_mtr" />
 
     <ImageView
         android:id="@+id/aMTSicon"
-        android:layout_width="35dp"
+        android:layout_width="65dp"
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:padding="3dp"
         android:src="@drawable/mtr_logo" />
+
+
 
     <TextView
         android:id="@+id/Line"
-        android:layout_width="60dp"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
         android:layout_marginRight="4dp"
@@ -24,12 +36,12 @@
         android:layout_alignTop="@+id/aMTSicon"
         android:layout_alignBottom="@+id/aMTSicon"
         android:text="Line"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/toDescription"
         android:text="@string/toDescription"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/Line"
@@ -40,16 +52,16 @@
 
     <TextView
         android:id="@+id/destinationTxt"
-        android:text="Destination"
-        android:layout_marginTop="8dp"
-        android:textStyle="bold"
-        android:maxLines="1"
-        android:layout_width="190dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/toDescription"
         android:layout_marginStart="6dp"
-        android:textSize="20sp" />
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@+id/toDescription"
+        android:maxLines="1"
+        android:text="Destination"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/min"
@@ -59,7 +71,7 @@
         android:textColor="#007fff"
         android:gravity="right"
         android:layout_width="24dp"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/destinationTxt"
         android:layout_marginStart="10dp"
@@ -68,42 +80,46 @@
 
     <TextView
         android:id="@+id/min_description"
-        android:text="min"
-        android:layout_marginTop="18dp"
-        android:textStyle="bold"
-        android:gravity="right"
-        android:layout_width="28dp"
-        android:layout_height="wrap_content"
+        android:layout_width="10dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/min"
         android:layout_marginStart="2dp"
-        android:textSize="12sp" />
+        android:layout_marginTop="18dp"
+        android:layout_toRightOf="@+id/min"
+        android:gravity="left"
+        android:text="min"
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/aStartpointtxt"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/destinationTxt"
         android:layout_marginEnd="6dp"
         android:layout_marginLeft="2dp"
         android:layout_marginStart="2dp"
+        android:layout_margin="3dp"
         android:layout_toRightOf="@+id/Line"
-        android:layout_below="@+id/destinationTxt"
         android:maxLines="2"
         android:text="Start Point"
-        android:textSize="16sp" />
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/aDatareturntxt"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:textStyle="bold"
-        android:layout_alignParentEnd="true"
+        android:layout_width="10dp"
+        android:layout_height="24dp"
+        android:layout_alignEnd="@+id/min_description"
         android:layout_below="@+id/destinationTxt"
-        android:layout_alignBottom="@id/aStartpointtxt"
+        android:layout_toRightOf="@id/aStartpointtxt"
+        android:layout_alignParentRight="true"
+        android:layout_margin="3dp"
+        android:gravity="left"
         android:text="00:04"
         android:textColor="#7b00ff"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
 

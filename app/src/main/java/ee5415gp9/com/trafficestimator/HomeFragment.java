@@ -30,13 +30,17 @@ public class HomeFragment extends Fragment {
         final String[] startpoints = getResources().getStringArray(R.array.stoppoint_array);
         final String[] datareturn = getResources().getStringArray(R.array.datareturn_array);
         final int[] mtsicon = {
-                R.drawable.mtr_logo, R.drawable.kmb_logo, R.drawable.lwb_logo,
+                R.drawable.mtr_logo_wordmark, R.drawable.kmb_logo, R.drawable.lwb_logo,
                 R.drawable.citybus_logo, R.drawable.kmb_logo, R.drawable.citybus_logo };
+        final int[] mtsbg = {
+                R.drawable.listitem_mtr, R.drawable.listitem_kmb, R.drawable.listitem_lwb,
+                R.drawable.listitem_citybus, R.drawable.listitem_kmb, R.drawable.listitem_citybus };
 
         FrameLayout view = (FrameLayout) inflater.inflate(R.layout.fragment_home, container, false);
 
         mListView = (ListView) view.findViewById(R.id.listview);
-        mListAdapter = new ListAdapter(getActivity(), lines, destinations, startpoints, datareturn, mtsicon);
+      //  mListView.setBackgroundResource(R.drawable.background);
+        mListAdapter = new ListAdapter(getActivity(), lines, destinations, startpoints, datareturn, mtsicon, mtsbg);
         mListView.setAdapter(mListAdapter);
 //        return inflater.inflate(R.layout.fragment_home, container, false);
         return view;

@@ -14,10 +14,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -143,6 +146,8 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         setContentView(R.layout.activity_main);
 
 //        studentDb = new DatabaseHelper(this);
@@ -229,6 +234,7 @@ public class MainActivity extends AppCompatActivity{
         //*****************************************************************************
 //        mTextMessage = (TextView) findViewById(R.id.nearest_station);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
 //        navigationView.inflateMenu(R.menu.navigation);
         fragmentManager = getSupportFragmentManager();
 
@@ -238,7 +244,9 @@ public class MainActivity extends AppCompatActivity{
                 .replace(R.id.main_container, mFragment).commit();
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
+        navigation.findViewById(R.id.navigation_home).setBackgroundResource(R.drawable.home_btn);
+        navigation.findViewById(R.id.navigation_search).setBackgroundResource(R.drawable.search_btn);
+        navigation.findViewById(R.id.navigation_searchHistory).setBackgroundResource(R.drawable.history_btn);
 
 //        File dbFile = new File(DB_PATH + DATABASE_NAME);
 //        //Log.v("dbFile", dbFile + "   "+ dbFile.exists());

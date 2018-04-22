@@ -81,6 +81,7 @@ public class SearchFragment extends Fragment {
 
 //                String[] datareturn = new String[mr_list.size()];
                 int[] mtsicon = new int[mr_list.size() + 0];
+                int[] mtbg = new int[mr_list.size() + 0];
 
                 for(int i = 0; i < mr_list.size(); i++) {
                         companies[i] = mr_list.get(i).getCOMPANY();
@@ -94,25 +95,38 @@ public class SearchFragment extends Fragment {
                         sources[i] = mr_list.get(i).getSource_eng();
 //                        datareturn[i] = "1";
 
-                        if(companies[i].equals("KMB"))
+                        if(companies[i].equals("KMB")) {
                                 mtsicon[i] = R.drawable.kmb_logo;
-                        else if(companies[i].equals("LWB"))
+                                mtbg[i] = R.drawable.listitem_kmb;
+                        }
+                        else if(companies[i].equals("LWB")) {
                                 mtsicon[i] = R.drawable.lwb_logo;
-                        else if(companies[i].equals("MTR"))
-                                mtsicon[i] = R.drawable.mtr_logo;
-                        else if(companies[i].equals("NWFB"))
-                            mtsicon[i] = R.drawable.newbus_logo;
-                        else if(companies[i].equals("NLB"))
+                                mtbg[i] = R.drawable.listitem_lwb;
+                        }
+                        else if(companies[i].equals("MTR")) {
+                                mtsicon[i] = R.drawable.mtr_logo_wordmark;
+                                mtbg[i] = R.drawable.listitem_mtr;
+                        }
+                        else if(companies[i].equals("NWFB")) {
+                                mtsicon[i] = R.drawable.newbus_logo;
+                                mtbg[i] = R.drawable.listitem_newbus;
+                        }
+                        else if(companies[i].equals("NLB")) {
                                 mtsicon[i] = R.drawable.nlb_logo;
-                        else if(companies[i].equals("CB"))
+                                mtbg[i] = R.drawable.listitem_newbus;
+                        }
+                        else if(companies[i].equals("CB")) {
                                 mtsicon[i] = R.drawable.citybus_logo;
+                                mtbg[i] = R.drawable.listitem_citybus;
+                        }
+
                 }
 
                 FrameLayout view = (FrameLayout) inflater.inflate(R.layout.fragment_search, container, false);
 
                 emptyView = (TextView) view.findViewById(R.id.emptyView);
                 mListView = (ListView) view.findViewById(R.id.listview);
-                mListAdapter = new ListAdapter_SearchRoute(getActivity(), lines, dests, mtsicon);
+                mListAdapter = new ListAdapter_SearchRoute(getActivity(), lines, dests, mtsicon, mtbg);
                 mListView.setAdapter(mListAdapter);
 
                 mListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -345,6 +359,7 @@ public class SearchFragment extends Fragment {
                         eta_ids = new String[mr_list.size()];
 
                         int[] mtsicon = new int[mr_list.size()];
+                        int[] mtbg = new int[mr_list.size()];
 
 
 //                        String[] datareturn = new String[mr_list.size()];
@@ -361,24 +376,36 @@ public class SearchFragment extends Fragment {
                                 dests[i] = mr_list.get(i).getDest_eng();
                                 sources[i] = mr_list.get(i).getSource_eng();
 
-                                if(companies[i].equals("KMB"))
+                                if(companies[i].equals("KMB")) {
                                         mtsicon[i] = R.drawable.kmb_logo;
-                                else if(companies[i].equals("LWB"))
+                                        mtbg[i] = R.drawable.listitem_kmb;
+                                }
+                                else if(companies[i].equals("LWB")) {
                                         mtsicon[i] = R.drawable.lwb_logo;
-                                else if(companies[i].equals("MTR"))
-                                        mtsicon[i] = R.drawable.mtr_logo;
-                                else if(companies[i].equals("NWFB"))
+                                        mtbg[i] = R.drawable.listitem_lwb;
+                                }
+                                else if(companies[i].equals("MTR")) {
+                                        mtsicon[i] = R.drawable.mtr_logo_wordmark;
+                                        mtbg[i] = R.drawable.listitem_mtr;
+                                }
+                                else if(companies[i].equals("NWFB")) {
                                         mtsicon[i] = R.drawable.newbus_logo;
-                                else if(companies[i].equals("NLB"))
+                                        mtbg[i] = R.drawable.listitem_newbus;
+                                }
+                                else if(companies[i].equals("NLB")) {
                                         mtsicon[i] = R.drawable.nlb_logo;
-                                else if(companies[i].equals("CB"))
+                                        mtbg[i] = R.drawable.listitem_newbus;
+                                }
+                                else if(companies[i].equals("CB")) {
                                         mtsicon[i] = R.drawable.citybus_logo;
+                                        mtbg[i] = R.drawable.listitem_citybus;
+                                }
                         }
 
 
 
                         //update Data
-                        mListAdapter = new ListAdapter_SearchRoute(getActivity(), lines, dests, mtsicon);
+                        mListAdapter = new ListAdapter_SearchRoute(getActivity(), lines, dests, mtsicon, mtbg);
                         mListView.setAdapter(mListAdapter);
                         mListAdapter.notifyDataSetChanged();
                 }
