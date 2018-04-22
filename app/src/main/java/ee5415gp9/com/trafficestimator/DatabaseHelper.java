@@ -326,8 +326,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "FROM " + TABLE_ROUTES + " r, master_stops s " +
                 "WHERE s.ID = '" + in_station_pk_id + "' " +
                 "AND ((r.COMPANY = s.COMPANY AND r.ROUTE = s.ROUTE AND r.BOUND = s.BOUND AND r.SERVICE_TYPE = s.SERVICE_TYPE)" +
-                    "OR (r.COMPANY = s.COMPANY AND r.ROUTE = s.ROUTE AND r.BOUND = s.BOUND) " +
+                    "OR (r.COMPANY = s.COMPANY AND r.ROUTE = s.ROUTE AND r.BOUND = s.BOUND AND s.SERVICE_TYPE IS NULL) " +
                     "OR (r.rdv = s.rdv))";
+
+//        String sql = "SELECT s.id, r.COMPANY, r.ROUTE, r.BOUND, r.SERVICE_TYPE, r.rdv, r.ETA_ID, r.source_chi, r.source_eng, r.dest_chi, r.dest_eng, s.stopid, s.stopseq, s.chi_name, s.eng_name " +
+//                "FROM " + TABLE_ROUTES + " r, master_stops s " +
+//                "WHERE s.ID = '" + in_station_pk_id + "' " +
+//                "AND ((r.COMPANY = s.COMPANY AND r.ROUTE = s.ROUTE AND r.BOUND = s.BOUND AND r.SERVICE_TYPE = s.SERVICE_TYPE)" +
+//                "OR (r.COMPANY = s.COMPANY AND r.ROUTE = s.ROUTE AND r.BOUND = s.BOUND) " +
+//                "OR (r.rdv = s.rdv))";
         System.out.println(sql);
         Cursor res = db.rawQuery(sql,null);
         return res;
