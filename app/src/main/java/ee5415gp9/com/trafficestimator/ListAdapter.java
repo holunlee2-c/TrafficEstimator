@@ -86,6 +86,8 @@ public class ListAdapter extends BaseAdapter
             viewHolder.txtMinReturn.setText(R.string.eta_arr_soon);
             viewHolder.txtMinDesc.setText("");
         }
+        else
+            viewHolder.txtMinReturn.setText(values_minReturn[position]);
 
 //        viewHolder.txtMinReturn.setText(values_minReturn[position]);
         viewHolder.iconMTS.setImageResource(MTSicon_images[position]);
