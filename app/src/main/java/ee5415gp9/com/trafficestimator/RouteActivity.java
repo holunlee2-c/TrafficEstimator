@@ -105,7 +105,7 @@ public class RouteActivity extends AppCompatActivity {
         }
         else if(company.equals("NLB")) {
             companyIcon.setImageResource(R.drawable.nlb_logo);
-            companyBg.setBackgroundResource(R.drawable.listitem_newbus);
+            companyBg.setBackgroundResource(R.drawable.listitem_nlb);
         }
         else if(company.equals("CB")) {
             companyIcon.setImageResource(R.drawable.citybus_logo);
@@ -178,7 +178,7 @@ public class RouteActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position,
                                     long id) {
-                this.openCreateContextMenu(v);
+               // this.openCreateContextMenu(v);
             }
         });
     }
