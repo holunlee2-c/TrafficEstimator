@@ -8,14 +8,28 @@
     android:layout_height="match_parent"
     tools:context="ee5415gp9.com.trafficestimator.MainActivity">
 
+    <ImageView
+        android:id="@+id/top_banna"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/top_banna" />
+
     <FrameLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/navigation"
-        android:layout_alignParentTop="true">
-    </FrameLayout>
+        android:layout_below="@+id/top_banna"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/top_banna"
+        android:background="@drawable/background"
+        app:layout_constraintTop_toBottomOf="@+id/top_banna">
 
+    </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

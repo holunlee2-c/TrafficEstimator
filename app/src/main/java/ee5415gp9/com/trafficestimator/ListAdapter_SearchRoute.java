@@ -1,6 +1,7 @@
 package ee5415gp9.com.trafficestimator;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -20,8 +21,9 @@ public class ListAdapter_SearchRoute extends BaseAdapter
     private final String [] values_line;
     private final String [] values_dest;
     private final int [] MTSicon_images;
+    private final int [] MTSbg;
 
-    public ListAdapter_SearchRoute(Context context, String [] values_line, String [] values_dest, int [] MTSicon_images)
+    public ListAdapter_SearchRoute(Context context, String [] values_line, String [] values_dest, int [] MTSicon_images, int [] MTSbg)
     {
 
 //super(context, R.layout.single_list_app_item, utilsArrayList);
@@ -29,6 +31,7 @@ public class ListAdapter_SearchRoute extends BaseAdapter
         this.values_line = values_line;
         this.values_dest = values_dest;
         this.MTSicon_images = MTSicon_images;
+        this.MTSbg = MTSbg;
     }
 
     @Override
@@ -58,6 +61,7 @@ public class ListAdapter_SearchRoute extends BaseAdapter
             viewHolder.txtLine = (TextView) convertView.findViewById(R.id.Line);
             viewHolder.txtDestination = (TextView) convertView.findViewById(R.id.destinationTxt);
             viewHolder.iconMTS = (ImageView) convertView.findViewById(R.id.aMTSicon);
+            viewHolder.bgMTS = (ImageView) convertView.findViewById(R.id.aMTSbg);
             result=convertView;
             convertView.setTag(viewHolder);
         } else {
@@ -67,11 +71,14 @@ public class ListAdapter_SearchRoute extends BaseAdapter
         viewHolder.txtLine.setText(values_line[position]);
         viewHolder.txtDestination.setText(values_dest[position]);
         viewHolder.iconMTS.setImageResource(MTSicon_images[position]);
+        viewHolder.bgMTS.setImageResource(MTSbg[position]);
+
         return convertView;
     }
     private static class ViewHolder {
         TextView txtLine;
         TextView txtDestination;
         ImageView iconMTS;
+        ImageView bgMTS;
     }
 }

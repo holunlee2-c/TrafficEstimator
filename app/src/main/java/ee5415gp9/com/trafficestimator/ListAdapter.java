@@ -22,7 +22,8 @@ public class ListAdapter extends BaseAdapter
     private final String [] values_startpt;
     private final String [] values_datareturn;
     private final int [] MTSicon_images;
-    public ListAdapter(Context context, String [] values_line, String [] values_dest, String [] values_startpt, String [] values_datareturn, int [] MTSicon_images)
+    private final int [] MTSbg;
+    public ListAdapter(Context context, String [] values_line, String [] values_dest, String [] values_startpt, String [] values_datareturn, int [] MTSicon_images, int [] MTS_bg)
     {
 
 //super(context, R.layout.single_list_app_item, utilsArrayList);
@@ -32,6 +33,7 @@ public class ListAdapter extends BaseAdapter
         this.values_startpt = values_startpt;
         this.values_datareturn = values_datareturn;
         this.MTSicon_images = MTSicon_images;
+        this.MTSbg = MTS_bg;
     }
 
     @Override
@@ -63,6 +65,7 @@ public class ListAdapter extends BaseAdapter
             viewHolder.txtStartpoint = (TextView) convertView.findViewById(R.id.aStartpointtxt);
             viewHolder.textDatareturn = (TextView) convertView.findViewById(R.id.aDatareturntxt);
             viewHolder.iconMTS = (ImageView) convertView.findViewById(R.id.aMTSicon);
+            viewHolder.bgMTS = (ImageView) convertView.findViewById(R.id.aMTSbg);
             result=convertView;
             convertView.setTag(viewHolder);
         } else {
@@ -74,6 +77,7 @@ public class ListAdapter extends BaseAdapter
         viewHolder.txtStartpoint.setText(values_startpt[position]);
         viewHolder.textDatareturn.setText(values_datareturn[position]);
         viewHolder.iconMTS.setImageResource(MTSicon_images[position]);
+        viewHolder.bgMTS.setImageResource(MTSbg[position]);
         return convertView;
     }
     private static class ViewHolder {
@@ -82,5 +86,6 @@ public class ListAdapter extends BaseAdapter
         TextView txtStartpoint;
         TextView textDatareturn;
         ImageView iconMTS;
+        ImageView bgMTS;
     }
 }
