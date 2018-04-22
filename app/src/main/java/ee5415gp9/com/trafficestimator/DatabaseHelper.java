@@ -29,10 +29,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "master_info.db";
     public static final String TABLE_ROUTES = "master_routes";
     public static final String TABLE_STOPS = "master_stops";
-    public static final String COL_1 = "ID";
-    public static final String COL_2 = "FIRSTNAME";
-    public static final String COL_3 = "LASTNAME";
-    public static final String COL_4 = "MARKS";
 
     private static String DB_PATH = "";
     private final Context mContext;
@@ -67,8 +63,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-//        db.execSQL("create table if not exists " + TABLE_ROUTES + "(TASK TEXT)");
-//        db.execSQL("create table if not exists " + TABLE_STOPS + "(TASK TEXT)");
+        db.execSQL("create table if not exists " + TABLE_ROUTES + "(TASK TEXT)");
+        db.execSQL("create table if not exists " + TABLE_STOPS + "(TASK TEXT)");
         try {
             createDatabase();
         } catch (IOException e) {
@@ -300,64 +296,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+
+    // Method to show all the records
+    public Cursor getRouteData_SearchSelectedHistory(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "select * from " + TABLE_ROUTES + " where ID = " + id;
+        System.out.println(sql);
+        Cursor res = db.rawQuery(sql,null);
+        return res;
+    }
+
     public synchronized void close(){
         if(master_database != null){
             master_database.close();
         }
         super.close();
     }
-
-//
-//
-//    @Override
-//    public void onCreate(SQLiteDatabase db) {
-////        db.execSQL("create table IF NOT EXISTS " + TABLE_ROUTES + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-////                "FIRSTNAME TEXT, LASTNAME TEXT, MARKS INTEGER)");
-//    }
-//
-//    @Override
-//    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ROUTES);
-//        onCreate(db);
-//    }
-//
-//    // Method to insert a record to the database
-//    public boolean insertData(String firstname, String lastname, String marks) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put(COL_2,firstname);
-//        contentValues.put(COL_3,lastname);
-//        contentValues.put(COL_4,marks);
-//        long result = db.insert(TABLE_ROUTES, null, contentValues);
-//        if (result == -1)
-//            return false;
-//        else
-//            return true;
-//    }
-//
-//    // Method to show all the records
-//    public Cursor getAllData() {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor res = db.rawQuery("select * from " + TABLE_ROUTES, null);
-//        return res;
-//    }
-//
-//    // Method to update a record
-//    public boolean updateData(String id, String firstname, String lastname, String marks)
-//    {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put(COL_1,id);
-//        contentValues.put(COL_2,firstname);
-//        contentValues.put(COL_3,lastname);
-//        contentValues.put(COL_4,marks);
-//        db.update(TABLE_ROUTES, contentValues, "ID = ?", new String[] {id});
-//        return true;
-//    }
-//
-//    // Method to delete a record
-//    public Integer deleteData (String id) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        return db.delete(TABLE_ROUTES, "ID = ?", new String[] {id});
-//    }
 }
