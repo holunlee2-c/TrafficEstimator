@@ -110,7 +110,7 @@ public class HomeFragment extends Fragment {
 
 
 
-        if(mr_list.size() >= 1) {
+        if(mr_list.size() > 0) {
             System.out.println("208: null" + mr_list.size());
             mListView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
@@ -697,7 +697,7 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
 
-        if(mr_list.size() >= 1  && ms_list.size() >= 1) {
+        if(mr_list.size() > 0  && ms_list.size() > 0) {
             System.out.println("209: null" + mr_list.size());
 
             mListView.setVisibility(View.VISIBLE);
