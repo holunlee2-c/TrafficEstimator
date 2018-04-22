@@ -134,17 +134,17 @@ public class ListAdapter_SearchStop extends BaseAdapter
         }
 
         //Check if useful
-//            viewHolder.txtFirst_time.setText(values_first_times[position]);
-//            viewHolder.txtFirst_min.setText(values_first_mins[position]);
-//            viewHolder.txtFirst_dest.setText(values_first_dest_eng[position]);
-//
-//            viewHolder.txtSecond_time.setText(values_second_times[position]);
-//            viewHolder.txtSecond_min.setText(values_second_mins[position]);
-//            viewHolder.txtSecond_dest.setText(values_second_dest_eng[position]);
-//
-//            viewHolder.txtThird_time.setText(values_third_times[position]);
-//            viewHolder.txtThird_min.setText(values_third_mins[position]);
-//            viewHolder.txtThird_dest.setText(values_third_dest_eng[position]);
+            viewHolder.txtFirst_time.setText(values_first_times[position]);
+            viewHolder.txtFirst_min.setText(values_first_mins[position]);
+            viewHolder.txtFirst_dest.setText(values_first_dest_eng[position]);
+
+            viewHolder.txtSecond_time.setText(values_second_times[position]);
+            viewHolder.txtSecond_min.setText(values_second_mins[position]);
+            viewHolder.txtSecond_dest.setText(values_second_dest_eng[position]);
+
+            viewHolder.txtThird_time.setText(values_third_times[position]);
+            viewHolder.txtThird_min.setText(values_third_mins[position]);
+            viewHolder.txtThird_dest.setText(values_third_dest_eng[position]);
 
 
         viewHolder.txtFirst_min_desc.setText(R.string.eta_text_min);
