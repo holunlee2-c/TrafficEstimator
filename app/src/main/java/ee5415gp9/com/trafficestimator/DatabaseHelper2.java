@@ -79,6 +79,7 @@ public class DatabaseHelper2 extends SQLiteOpenHelper {
         return res;
     }
 
+
     // Method to update a record
     public boolean updateData(String id, int in_pk_from_master)
     {

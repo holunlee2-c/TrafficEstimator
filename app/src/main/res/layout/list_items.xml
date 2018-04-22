@@ -70,7 +70,7 @@
         android:textStyle="bold"
         android:textColor="#007fff"
         android:gravity="right"
-        android:layout_width="24dp"
+        android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/destinationTxt"

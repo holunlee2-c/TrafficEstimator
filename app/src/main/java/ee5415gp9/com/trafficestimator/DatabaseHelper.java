@@ -285,7 +285,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "OR " +
                         "(route = '" + route + "' AND bound = '" + bound + "' AND service_type IS NULL ) " +
                         "OR " +
-                        "rdv = '" + rdv + "' " +
+                        "rdv = '" + rdv + "'  " +
                         "ORDER BY CAST(stopseq AS INTEGER)";
 
 //        String sql =
@@ -318,6 +318,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery(sql,null);
         return res;
     }
+
+
+    public Cursor getRouteData_SearchSelectedFavourite(int in_station_pk_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = "SELECT s.id, r.COMPANY, r.ROUTE, r.BOUND, r.SERVICE_TYPE, r.rdv, r.ETA_ID, r.source_chi, r.source_eng, r.dest_chi, r.dest_eng, s.stopid, s.stopseq, s.chi_name, s.eng_name " +
+                "FROM " + TABLE_ROUTES + " r, master_stops s " +
+                "WHERE s.ID = '" + in_station_pk_id + "' " +
+                "AND ((r.COMPANY = s.COMPANY AND r.ROUTE = s.ROUTE AND r.BOUND = s.BOUND AND r.SERVICE_TYPE = s.SERVICE_TYPE)" +
+                    "OR (r.COMPANY = s.COMPANY AND r.ROUTE = s.ROUTE AND r.BOUND = s.BOUND) " +
+                    "OR (r.rdv = s.rdv))";
+        System.out.println(sql);
+        Cursor res = db.rawQuery(sql,null);
+        return res;
+    }
+
 
     public synchronized void close(){
         if(master_database != null){
