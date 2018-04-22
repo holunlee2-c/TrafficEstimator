@@ -6,6 +6,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -152,7 +157,44 @@ public class RouteActivity extends AppCompatActivity {
 ////                    Log.e(Vars.TAG, "It is NOT SHOWING");
 //            }
 //        }
+
+//        registerForContextMenu(mListView);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position,
+                                    long id) {
+                this.openCreateContextMenu(v);
+            }
+        });
     }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_stops, menu);
+    }
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuItemWelcome:
+//                mOutEditText.setText( this.getResources().getText( R.string.welcome_msg) );
+                System.out.println("");
+                return true;
+            case R.id.menuItemAbout:
+//                mOutEditText.setText( this.getResources().getText( R.string.about_msg) );
+                System.out.println("");
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
 
     @Override
     protected void onResume()

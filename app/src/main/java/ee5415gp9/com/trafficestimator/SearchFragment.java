@@ -35,8 +35,10 @@ public class SearchFragment extends Fragment {
         public ListAdapter_SearchRoute mListAdapter;
 
         DatabaseHelper eta_Db;
+        DatabaseHelper2 history_Db;
 
         List<MasterRoutes> mr_list;
+        int[] ids;
         String[] companies;
         String[] lines;
         String[] dests;
@@ -67,6 +69,8 @@ public class SearchFragment extends Fragment {
 //                String[] sources = new String[mr_list.size()];
 
                 mr_list = viewAllRecords();
+
+                ids = new int[mr_list.size()];
                 companies = new String[mr_list.size()];
                 lines = new String[mr_list.size()];
                 dests = new String[mr_list.size()];
@@ -83,6 +87,7 @@ public class SearchFragment extends Fragment {
                 int[] mtsicon = new int[mr_list.size() + 0];
 
                 for(int i = 0; i < mr_list.size(); i++) {
+                        ids[i] =  mr_list.get(i).getID();
                         companies[i] = mr_list.get(i).getCOMPANY();
                         lines[i] = mr_list.get(i).getROUTE();
                         bounds[i] = mr_list.get(i).getBOUND();
@@ -111,6 +116,7 @@ public class SearchFragment extends Fragment {
                 FrameLayout view = (FrameLayout) inflater.inflate(R.layout.fragment_search, container, false);
 
                 emptyView = (TextView) view.findViewById(R.id.emptyView);
+
                 mListView = (ListView) view.findViewById(R.id.listview);
                 mListAdapter = new ListAdapter_SearchRoute(getActivity(), lines, dests, mtsicon);
                 mListView.setAdapter(mListAdapter);
@@ -120,7 +126,25 @@ public class SearchFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
                     {
-                        //call Route_station Activity
+                        //Add into Database
+                            history_Db.insertData(ids[i]);
+//                            Cursor cursor = history_Db.getAllData();
+//
+//                            if (cursor.getCount() == 0) {
+//                                    System.out.println("144: No record");
+//                                    return;
+//                            }
+//                            StringBuffer buffer = new StringBuffer();
+//                            while (cursor.moveToNext()) {
+////                                    buffer.append("Id :"+ res.getString(0)+"\n");
+//                                    System.out.println("144 history_db, PK: " + cursor.getString(0));
+//                                    System.out.println("144 history_db, PK_ID: " + cursor.getString(1));
+//                            }
+
+                            System.out.println("201: " + ids[i] + ", " + companies[i] + ", " + lines[i] + ", "+ bounds[i]);
+
+
+                            //call Route_station Activity
                             Intent intent = new Intent(getActivity(), RouteActivity.class);
 
                             Bundle bundle = new Bundle();
@@ -134,7 +158,7 @@ public class SearchFragment extends Fragment {
                             bundle.putString("dest", dests[i]);
                             bundle.putString("source", sources[i]);
 
-                            System.out.println("165 : " + lines[i] + " " + bounds[i] + " " + rdvs[i]);
+                            System.out.println("165 : " + ids[i] + ", " + lines[i] + " " + bounds[i] + " " + rdvs[i]);
 
 
                             //Showing "On Loading" to user
@@ -224,6 +248,10 @@ public class SearchFragment extends Fragment {
         private void initDatabaseHelper(){
                 if(eta_Db == null){
                         eta_Db = new DatabaseHelper(getActivity());
+                }
+
+                if(history_Db == null){
+                        history_Db = new DatabaseHelper2(getActivity());
                 }
         }
 
@@ -333,6 +361,7 @@ public class SearchFragment extends Fragment {
                         mListView.setVisibility(View.VISIBLE);
                         emptyView.setVisibility(View.GONE);
 
+                        ids = new int[mr_list.size()];
                         companies = new String[mr_list.size()];
                         lines = new String[mr_list.size()];
                         dests = new String[mr_list.size()];
@@ -351,6 +380,7 @@ public class SearchFragment extends Fragment {
 //                        int[] mtsicon = new int[mr_list.size()];
 
                         for(int i = 0; i < mr_list.size(); i++) {
+                                ids[i] = mr_list.get(i).getID();
                                 companies[i] = mr_list.get(i).getCOMPANY();
                                 lines[i] = mr_list.get(i).getROUTE();
                                 bounds[i] = mr_list.get(i).getBOUND();
@@ -389,4 +419,7 @@ public class SearchFragment extends Fragment {
 
                 System.out.println("testing2....");
         }
+
+
+
 }
