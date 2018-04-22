@@ -24,7 +24,7 @@ public class StartupActivity extends AppCompatActivity
         animation = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
         //title.setAnimation(animation);
         theme_startup.setAnimation(animation);
-        animation.setDuration(1000);
+        animation.setDuration(2500);
         animation.setAnimationListener(new AnimationListener(){
             @Override
             public void onAnimationStart(Animation animation) { }
