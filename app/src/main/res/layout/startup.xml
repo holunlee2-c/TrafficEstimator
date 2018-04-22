@@ -16,7 +16,7 @@ Welcome page is showed when app starting up.
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/theme_startup"
         android:layout_width="311dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
