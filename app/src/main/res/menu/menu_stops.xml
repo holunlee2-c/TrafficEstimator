@@ -3,4 +3,7 @@
     <item
         android:id="@+id/add_favourite"
         android:title="@string/contextMenu_addFavourite" />
+    <item
+        android:id="@+id/complain"
+        android:title="@string/complain_title" />
 </menu>

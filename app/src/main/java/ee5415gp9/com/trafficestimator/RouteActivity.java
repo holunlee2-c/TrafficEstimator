@@ -1,13 +1,16 @@
 package ee5415gp9.com.trafficestimator;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -30,6 +33,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -248,11 +253,91 @@ public class RouteActivity extends AppCompatActivity {
                 }
 
                 return true;
+            case R.id.complain:
+                sentComplain(index);
+                return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
 
+
+    public boolean isConnectedToServer(String url, int timeout) {
+        try{
+            URL myUrl = new URL(url);
+            URLConnection connection = myUrl.openConnection();
+            connection.setConnectTimeout(timeout);
+            connection.connect();
+            return true;
+        } catch (Exception e) {
+            // Handle your exceptions
+            return false;
+        }
+    }
+
+    public void sentComplain(int index){
+
+//        company = bundle.getString("company");
+//        line = bundle.getString("line");
+//        bound = bundle.getString("bound");
+//        service_type = bundle.getString("service_type");
+//        rdv = bundle.getString("rdv");
+//        eta_id = bundle.getString("eta_id");
+
+
+        Bundle bundle = getIntent().getExtras();
+        company = bundle.getString("company");
+        line = bundle.getString("line");
+        dest = bundle.getString("dest");
+        source = bundle.getString("source");
+
+        String stop = ms_list.get(index).getEng_name();
+
+        String first_time = ms_list.get(index).getFirst_time();
+        String first_min = ms_list.get(index).getFirst_min();
+        String first_dest_eng = ms_list.get(index).getFirst_dest_eng();
+
+        String second_time = ms_list.get(index).getSecond_time();
+        String second_min = ms_list.get(index).getSecond_min();
+        String second_dest_eng = ms_list.get(index).getSecond_dest_eng();
+
+        String third_time = ms_list.get(index).getThird_time();
+        String third_min = ms_list.get(index).getThird_min();
+        String third_dest_eng = ms_list.get(index).getThird_dest_eng();
+
+        String revised_company = company;
+        if(company.equals("CB"))
+            revised_company = "City Bus";
+        else if(company.equals("LWB"))
+            revised_company = "Long Win Bus";
+        else if(company.equals("NLB"))
+            revised_company = "New Lantau Bus";
+
+        String revised_line = line;
+        if(line.equals("WRL"))
+            revised_company = "West Rail Line";
+        else if(line.equals("TCL"))
+            revised_company = "Tung Chung Line";
+        else if(line.equals("TKL"))
+            revised_company = "Tseung Kwan O Line";
+        else if(line.equals("AEL"))
+            revised_company = "Airport Express";
+
+        String email_title = getString(R.string.complain_email_title) + " " + revised_company  + " - " + revised_line;
+        System.out.println(email_title);
+
+        String email_content_pt1 = getString(R.string.complain_email_content_pt1) + " " + revised_company  + "</br>" ;
+        String email_content_pt2 = "</br> " + getString(R.string.complain_email_content_pt2) + ". </br>" ;
+
+        String email_content = email_content_pt1 + email_content_pt2;
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:tellme@1823.gov.hk"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, email_title);
+        intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(email_content));
+        startActivity(intent);
+    }
 
     @Override
     protected void onResume()
@@ -366,38 +451,38 @@ public class RouteActivity extends AppCompatActivity {
             }
 
 
-
-            HttpAsyncTask hat = new HttpAsyncTask();
-            ArrayList <MasterStops> ms_AL = hat.execute(link).get();
+            if(isConnectedToServer(link,100)) {
+                HttpAsyncTask hat = new HttpAsyncTask();
+                ArrayList<MasterStops> ms_AL = hat.execute(link).get();
 
 
 //            System.out.println("ms_AL.size()" + ms_AL.size());
 //            System.out.println("hat.getStopList2()" + hat.getStopList2());
 
 //            //??? New Add for ETA
-            for (int i = 0; i < ms_AL.size(); i++){
-                System.out.println("ms_AL.size()" + ms_AL.size());
-                System.out.println("eng_name :" + eng_name);
-                System.out.println("ms_AL.get(i).getFirst_min() " + ms_AL.get(i).getFirst_min());
+                for (int i = 0; i < ms_AL.size(); i++) {
+                    System.out.println("ms_AL.size()" + ms_AL.size());
+                    System.out.println("eng_name :" + eng_name);
+                    System.out.println("ms_AL.get(i).getFirst_min() " + ms_AL.get(i).getFirst_min());
 
-                ms.setStopseqs(String.valueOf(i + 1));
-                ms.setFirst_time(ms_AL.get(i).getFirst_time());
-                ms.setFirst_min(ms_AL.get(i).getFirst_min());
-                ms.setFirst_dest_chi(ms_AL.get(i).getFirst_dest_chi());
-                ms.setFirst_dest_eng(ms_AL.get(i).getFirst_dest_eng());
+                    ms.setStopseqs(String.valueOf(i + 1));
+                    ms.setFirst_time(ms_AL.get(i).getFirst_time());
+                    ms.setFirst_min(ms_AL.get(i).getFirst_min());
+                    ms.setFirst_dest_chi(ms_AL.get(i).getFirst_dest_chi());
+                    ms.setFirst_dest_eng(ms_AL.get(i).getFirst_dest_eng());
 
-                ms.setSecond_time(ms_AL.get(i).getSecond_time());
-                ms.setSecond_min(ms_AL.get(i).getSecond_min());
-                ms.setSecond_dest_chi(ms_AL.get(i).getSecond_dest_chi());
-                ms.setSecond_dest_eng(ms_AL.get(i).getSecond_dest_eng());
+                    ms.setSecond_time(ms_AL.get(i).getSecond_time());
+                    ms.setSecond_min(ms_AL.get(i).getSecond_min());
+                    ms.setSecond_dest_chi(ms_AL.get(i).getSecond_dest_chi());
+                    ms.setSecond_dest_eng(ms_AL.get(i).getSecond_dest_eng());
 
-                ms.setThird_time(ms_AL.get(i).getThird_time());
-                ms.setThird_min(ms_AL.get(i).getThird_min());
-                ms.setThird_dest_chi(ms_AL.get(i).getThird_dest_chi());
-                ms.setThird_dest_eng(ms_AL.get(i).getThird_dest_eng());
+                    ms.setThird_time(ms_AL.get(i).getThird_time());
+                    ms.setThird_min(ms_AL.get(i).getThird_min());
+                    ms.setThird_dest_chi(ms_AL.get(i).getThird_dest_chi());
+                    ms.setThird_dest_eng(ms_AL.get(i).getThird_dest_eng());
 
+                }
             }
-
             ms_list.add(ms);
 
             System.out.println("167: " + COMPANY + " " + ROUTE + " " + BOUND);

@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,6 +35,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -351,6 +355,20 @@ public class HomeFragment extends Fragment {
         initDatabaseHelper();
     }
 
+    public boolean isConnectedToServer(String url, int timeout) {
+        try{
+            URL myUrl = new URL(url);
+            URLConnection connection = myUrl.openConnection();
+            connection.setConnectTimeout(timeout);
+            connection.connect();
+            return true;
+        } catch (Exception e) {
+            // Handle your exceptions
+            return false;
+        }
+    }
+
+
 
     private void initDatabaseHelper(){
         if(eta_Db == null){
@@ -507,21 +525,23 @@ public class HomeFragment extends Fragment {
                     System.out.println("NWFB & CB link : " + link);
                 }
 
+//                ???New Add
+                if(isConnectedToServer(link,100))
+                {
+                    HttpAsyncTask hat = new HttpAsyncTask();
+                    ArrayList<MasterStops> ms_AL = hat.execute(link).get();
 
-                HttpAsyncTask hat = new HttpAsyncTask();
-                ArrayList<MasterStops> ms_AL = hat.execute(link).get();
+                    //??? New Add for ETA
+                    for (int i = 0; i < ms_AL.size(); i++) {
+                        System.out.println("ms_AL.size()" + ms_AL.size());
+                        System.out.println("eng_name :" + eng_name);
+                        System.out.println("ms_AL.get(i).getFirst_min() " + ms_AL.get(i).getFirst_min());
 
-                //??? New Add for ETA
-                for (int i = 0; i < ms_AL.size(); i++) {
-                    System.out.println("ms_AL.size()" + ms_AL.size());
-                    System.out.println("eng_name :" + eng_name);
-                    System.out.println("ms_AL.get(i).getFirst_min() " + ms_AL.get(i).getFirst_min());
-
-                    ms.setStopseqs(String.valueOf(i + 1));
-                    ms.setFirst_time(ms_AL.get(i).getFirst_time());
-                    ms.setFirst_min(ms_AL.get(i).getFirst_min());
-                    ms.setFirst_dest_chi(ms_AL.get(i).getFirst_dest_chi());
-                    ms.setFirst_dest_eng(ms_AL.get(i).getFirst_dest_eng());
+                        ms.setStopseqs(String.valueOf(i + 1));
+                        ms.setFirst_time(ms_AL.get(i).getFirst_time());
+                        ms.setFirst_min(ms_AL.get(i).getFirst_min());
+                        ms.setFirst_dest_chi(ms_AL.get(i).getFirst_dest_chi());
+                        ms.setFirst_dest_eng(ms_AL.get(i).getFirst_dest_eng());
 
 //                    ms.setSecond_time(ms_AL.get(i).getSecond_time());
 //                    ms.setSecond_min(ms_AL.get(i).getSecond_min());
@@ -533,6 +553,7 @@ public class HomeFragment extends Fragment {
 //                    ms.setThird_dest_chi(ms_AL.get(i).getThird_dest_chi());
 //                    ms.setThird_dest_eng(ms_AL.get(i).getThird_dest_eng());
 
+                    }
                 }
 
                 ms_list.add(ms);
@@ -720,6 +741,8 @@ public class HomeFragment extends Fragment {
 
             chi_name = new String[ms_list.size()];
             eng_name = new String[ms_list.size()];
+
+
 
             first_times = new String[ms_list.size()];
             first_mins = new String[ms_list.size()];
