@@ -313,13 +313,13 @@ public class RouteActivity extends AppCompatActivity {
 
         String revised_line = line;
         if(line.equals("WRL"))
-            revised_company = "West Rail Line";
+            revised_line = "West Rail Line";
         else if(line.equals("TCL"))
-            revised_company = "Tung Chung Line";
+            revised_line = "Tung Chung Line";
         else if(line.equals("TKL"))
-            revised_company = "Tseung Kwan O Line";
+            revised_line = "Tseung Kwan O Line";
         else if(line.equals("AEL"))
-            revised_company = "Airport Express";
+            revised_line = "Airport Express";
 
         String email_title = getString(R.string.complain_email_title) + " " + revised_company  + " - " + revised_line;
         System.out.println(email_title);
@@ -353,7 +353,7 @@ public class RouteActivity extends AppCompatActivity {
         sb.append(getString(R.string.complain_email_content_pt2) + '\n');
         sb.append(getString(R.string.complain_email_content_pt3) + " " + sdf.format(dt) + ' ' + '\n');
         sb.append(getString(R.string.complain_email_content_pt4) + " " + revised_company + '\n');
-        sb.append(getString(R.string.complain_email_content_pt5) + " " + line + '\n');
+        sb.append(getString(R.string.complain_email_content_pt5) + " " + revised_line + '\n');
         sb.append(getString(R.string.complain_email_content_pt6) + " " + dest + '\n');
         sb.append(getString(R.string.complain_email_content_pt7) + " " + stop + '\n' + '\n');
         sb.append(getString(R.string.complain_email_content_pt8) + ' ' + first_time + ' ' + '(' + first_min + "min" + ')' + '\n');
