@@ -371,7 +371,7 @@ public class SearchFragment extends Fragment {
 
                 mr_list = viewSearchRoutes(input_company,in_route);
 
-                if(mr_list.size() > 0) {
+                if(mr_list != null && mr_list.size() > 0) {
 //                if(mr_list != null) {
                         mListView.setVisibility(View.VISIBLE);
                         emptyView.setVisibility(View.GONE);
