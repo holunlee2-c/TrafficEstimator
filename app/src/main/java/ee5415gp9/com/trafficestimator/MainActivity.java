@@ -2,6 +2,7 @@ package ee5415gp9.com.trafficestimator;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
@@ -31,6 +32,7 @@ import android.widget.Toast;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
@@ -156,7 +158,21 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
 //        studentDb = new DatabaseHelper(this);
+
+        copyDatabase();
+        System.out.println("copyDatabase();");
         eta_Db = new DatabaseHelper(this);
+
+        boolean if_exists = checkDataBase();
+
+        if(!if_exists) {
+            //If no connection, return AlertDialog
+            checkNetworkConn();
+            //If Connected Wifi, download and update the DB
+            checkConnectedWifiAndDownload();
+        }
+        else
+            System.out.print("301a no need to download");
 //        viewAllRecords();
 
 
@@ -262,7 +278,7 @@ public class MainActivity extends AppCompatActivity{
 //        new DownloadFileFromURL().execute(onlineDB_LINK);
 
         //If Connected Wifi, download and update the DB
-        checkConnectedWifiAndDownload();
+//        checkConnectedWifiAndDownload();
 
 //        ConnectivityManager connManager = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
 //        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -271,22 +287,32 @@ public class MainActivity extends AppCompatActivity{
 //            new DownloadFileFromURL().execute(onlineDB_LINK);
 //        }
 
-        //If no connection, return AlertDialog
-        checkNetworkConn();
-        checkConnectedWifiAndDownload();
 
-//        ConnectivityManager cm =
-//                (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
-//        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-////        return netInfo != null && netInfo.isConnectedOrConnecting();
-////        if (netInfo == null && !netInfo.isConnectedOrConnecting())
-////            checkNetWorkConn();
+//        copyDatabase();
 //
-//        if (cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isAvailable() && cm.getActiveNetworkInfo().isConnected()) {
+//        System.out.println("copyDatabase();");
+//
+//        boolean if_exists = checkDataBase();
+//
+//        if(!if_exists) {
+//            //If no connection, return AlertDialog
+//            checkNetworkConn();
+//            //If Connected Wifi, download and update the DB
+//            checkConnectedWifiAndDownload();
 //        }
 //        else
-//            returnNoNetWorkConn();
+//            System.out.print("301a no need to download");
 
+    }
+
+    //Check DB exists or not exist
+    public boolean checkDataBase()
+    {
+        ContextWrapper cw =new ContextWrapper(getApplicationContext());
+        String DB_PATH =cw.getFilesDir().getAbsolutePath()+ "/databases/"; //data/data Folder
+
+        File dbFile = new File(DB_PATH + storedDB_NAME);
+        return dbFile.exists();
     }
 
     public boolean checkConnectedWifi() {
@@ -438,7 +464,65 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-//  Useful, Don't delete
+    public boolean copyDatabase()
+    {
+//        String inFileName =  "/data/data/"
+//                +getApplicationContext().getPackageName()
+//                + "/databases/" + storedDB_NAME;
+//
+//        File file = new File(inFileName);
+//        boolean deleted = file.delete();
+//
+//        return deleted;
+
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+//        String DB_PATH =cw.getFilesDir().getAbsolutePath()+ "/databases/"; //data/data Folder
+
+        String outFileName =  "/data/data/"
+                +getApplicationContext().getPackageName()
+                + "/databases/";
+
+
+        Log.i("Database",
+                "New database is being copied to device!");
+        byte[] buffer = new byte[1024];
+        OutputStream myOutput = null;
+        int length;
+        // Open your local db as the input stream
+        InputStream myInput = null;
+        try
+        {
+            myInput = this.getAssets().open(storedDB_NAME); //Assets Folder
+            // transfer bytes from the inputfile to the
+            // outputfile
+            File newFile = new File(outFileName);
+            newFile.mkdir();
+            myOutput =new FileOutputStream(outFileName + storedDB_NAME); //data/data Folder
+            while((length = myInput.read(buffer)) > 0)
+            {
+                myOutput.write(buffer, 0, length);
+            }
+            myOutput.close();
+            myOutput.flush();
+            myInput.close();
+            Log.i("Database",
+                    "New database has been copied to device!");
+
+            System.out.print("301 copy DB from assets folder");
+
+            return true;
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+
+    //  Useful, Don't delete
     class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
         /**
@@ -447,7 +531,7 @@ public class MainActivity extends AppCompatActivity{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            System.out.println("Starting download");
+            System.out.println("400: Starting download");
 
             pDialog = new ProgressDialog(MainActivity.this);
             pDialog.setMessage("Loading... Please wait...");

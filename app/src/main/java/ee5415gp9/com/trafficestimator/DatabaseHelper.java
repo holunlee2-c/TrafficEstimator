@@ -6,6 +6,7 @@ package ee5415gp9.com.trafficestimator;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -84,12 +85,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     {
         //Open database
         String mypath = DB_PATH + DATABASE_NAME;
-        master_database = SQLiteDatabase.openDatabase(mypath, null, SQLiteDatabase.OPEN_READWRITE);
+//        master_database = SQLiteDatabase.openDatabase(mypath, null, SQLiteDatabase.OPEN_READWRITE);
+        master_database = SQLiteDatabase.openDatabase(mypath, null, SQLiteDatabase.NO_LOCALIZED_COLLATORS | SQLiteDatabase.OPEN_READWRITE);
     }
 
 
     //Check DB exists or not exist
-    private boolean checkDataBase()
+    public boolean checkDataBase()
     {
         File dbFile = new File(DB_PATH + DATABASE_NAME);
         //Log.v("dbFile", dbFile + "   "+ dbFile.exists());
@@ -119,60 +121,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-
-    //Copy the database from Online Server
-//    private void downloadDatabase() throws IOException
-//    {
-////        InputStream mInput = mContext.getAssets().open(DATABASE_NAME);
-////        String outFileName = DB_PATH + DATABASE_NAME;
-////        FileOutputStream mOutput = new FileOutputStream(outFileName);
-////        byte[] mBuffer = new byte[1024];
-////        int mLength;
-////        while ((mLength = mInput.read(mBuffer))>0)
-////        {
-////            mOutput.write(mBuffer, 0, mLength);
-////        }
-////        mOutput.flush();
-////        mOutput.close();
-////        mInput.close();
-//        int count;
-//        try {
-//            URL url = new URL(onlineDB_link);
-//
-//            URLConnection conection = url.openConnection();
-//            conection.connect();
-//            // getting file length
-//            int lenghtOfFile = conection.getContentLength();
-//
-//            // input stream to read file - with 8k buffer
-//            InputStream input = new BufferedInputStream(url.openStream(), 8192);
-//
-//            File dir = new File(DB_PATH);
-//            dir.mkdirs();
-//            File f = new File(DB_PATH + DATABASE_NAME);
-//
-//            OutputStream output = new FileOutputStream(f);
-//
-//            byte data[] = new byte[1024];
-//
-//            long total = 0;
-//            while ((count = input.read(data)) != -1) {
-//                total += count;
-//
-//                // writing data to file
-//                output.write(data, 0, count);
-//            }
-//
-//            // flushing output
-//            output.flush();
-//
-//            // closing streams
-//            output.close();
-//            input.close();
-//        } catch (Exception e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//    }
 
     class DownloadFileFromURL extends AsyncTask<String, String, String> {
 
