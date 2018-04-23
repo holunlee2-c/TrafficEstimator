@@ -9,20 +9,18 @@
     tools:context="ee5415gp9.com.trafficestimator.MainActivity">
 
 
-
     <FrameLayout
         android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/navigation"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="2dp"
-        android:background="@drawable/background">
+        android:layout_marginTop="?attr/actionBarSize">
+
     </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="2dp"
         android:layout_marginStart="2dp"

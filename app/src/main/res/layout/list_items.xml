@@ -52,7 +52,7 @@
 
     <TextView
         android:id="@+id/destinationTxt"
-        android:layout_width="140dp"
+        android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="6dp"
@@ -69,7 +69,7 @@
         android:layout_marginTop="8dp"
         android:textStyle="bold"
         android:textColor="#007fff"
-        android:gravity="right"
+        android:gravity="left"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
         android:layout_alignParentTop="true"
@@ -94,13 +94,15 @@
 
     <TextView
         android:id="@+id/aStartpointtxt"
-        android:layout_width="165dp"
+        android:layout_width="133dp"
         android:layout_height="32dp"
         android:layout_below="@+id/destinationTxt"
-        android:layout_marginEnd="6dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginStart="2dp"
-        android:layout_margin="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
         android:layout_toRightOf="@+id/Line"
         android:maxLines="2"
         android:text="Start Point"
