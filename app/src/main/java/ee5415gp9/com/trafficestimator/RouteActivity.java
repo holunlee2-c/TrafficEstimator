@@ -1,10 +1,13 @@
 package ee5415gp9.com.trafficestimator;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,10 +32,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -40,6 +47,9 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class RouteActivity extends AppCompatActivity {
+
+    private final String server_link = "http://antony9655.mynetgear.com";
+    private final int timeout_sec = 2;
 
     List<MasterRoutes> mr_list;
     List<MasterStops> ms_list;
@@ -261,20 +271,6 @@ public class RouteActivity extends AppCompatActivity {
         }
     }
 
-
-    public boolean isConnectedToServer(String url, int timeout) {
-        try{
-            URL myUrl = new URL(url);
-            URLConnection connection = myUrl.openConnection();
-            connection.setConnectTimeout(timeout);
-            connection.connect();
-            return true;
-        } catch (Exception e) {
-            // Handle your exceptions
-            return false;
-        }
-    }
-
     public void sentComplain(int index){
 
 //        company = bundle.getString("company");
@@ -386,6 +382,9 @@ public class RouteActivity extends AppCompatActivity {
             return null;
         }
 
+        HttpAsyncTask2 hat2 = new HttpAsyncTask2();
+        boolean connected_Server = hat2.execute(server_link).get();
+
         while (res.moveToNext()) {
 
             int ID = res.getInt(0);
@@ -451,7 +450,17 @@ public class RouteActivity extends AppCompatActivity {
             }
 
 
-            if(isConnectedToServer(link,100)) {
+//            HttpAsyncTask2 hat2 = new HttpAsyncTask2();
+//            boolean connected_Server = hat2.execute(server_link).get();
+
+            System.out.print(" 290 boolean connected_Server: " + connected_Server);
+
+//            boolean connected_Server = (boolean) new HttpAsyncTask2().get();
+            if(connected_Server)
+            {
+//                    HttpAsyncTask hat = new HttpAsyncTask();
+//            ArrayList<MasterStops> ms_AL = hat.execute(link).get();
+//            if(isConnectedToServer(link,1000)) {
                 HttpAsyncTask hat = new HttpAsyncTask();
                 ArrayList<MasterStops> ms_AL = hat.execute(link).get();
 
@@ -482,6 +491,10 @@ public class RouteActivity extends AppCompatActivity {
                     ms.setThird_dest_eng(ms_AL.get(i).getThird_dest_eng());
 
                 }
+            }
+            else
+            {
+                System.out.println("270: Cannot connect server");
             }
             ms_list.add(ms);
 
@@ -646,6 +659,56 @@ public class RouteActivity extends AppCompatActivity {
 //
 //            return result;
 //        }
+
+        private String convertInputStreamToString(InputStream inputStream) throws IOException {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line = "";
+            String result = "";
+            while ((line = bufferedReader.readLine()) != null)
+                result += line;
+
+            inputStream.close();
+
+            System.out.println("convertInputStreamToString : " + result);
+
+            return result;
+        }
+
+    }
+
+    private class HttpAsyncTask2 extends AsyncTask<String, Void, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... urls) {
+//            return GET(urls[0]);
+
+            System.out.println("HttpAsyncTask2");
+
+            InputStream inputStream = null;
+            String result = "";
+            try {
+                System.out.println("Connecting");
+//                URL url = new URL("http://antony9655.mynetgear.com");
+                URL url = new URL(urls[0]);
+
+                URLConnection conection = url.openConnection();
+                conection.setConnectTimeout(timeout_sec * 1000);
+                conection.connect();
+                System.out.println("280 : Server connected");
+
+                return true;
+            } catch(Exception e)
+            {
+                System.out.println("280a : cannot connect server");
+                return false;
+            }
+
+        }
 
         private String convertInputStreamToString(InputStream inputStream) throws IOException {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));

@@ -48,6 +48,8 @@ public class HomeFragment extends Fragment {
     DatabaseHelper2 history_Db;
 
     public static ProgressDialog pDialog;
+    private final String server_link = "http://antony9655.mynetgear.com";
+    private final int timeout_sec = 2;
 
     List<MasterRoutes> mr_list;
     List<MasterStops> ms_list;
@@ -460,6 +462,9 @@ public class HomeFragment extends Fragment {
         List<MasterStops> ms_list = new ArrayList<MasterStops>();
         Cursor cursor = history_Db.getFavouriteAllData();
 
+        HttpAsyncTask2 hat2 = new HttpAsyncTask2();
+        boolean connected_Server = hat2.execute(server_link).get();
+
         while (cursor.moveToNext()) {
             int pk_id = cursor.getInt(1);
             Cursor res = eta_Db.getRouteData_SearchSelectedFavourite(pk_id);
@@ -525,8 +530,8 @@ public class HomeFragment extends Fragment {
                     System.out.println("NWFB & CB link : " + link);
                 }
 
-//                ???New Add
-                if(isConnectedToServer(link,100))
+                //
+                if(connected_Server)
                 {
                     HttpAsyncTask hat = new HttpAsyncTask();
                     ArrayList<MasterStops> ms_AL = hat.execute(link).get();
@@ -554,6 +559,10 @@ public class HomeFragment extends Fragment {
 //                    ms.setThird_dest_eng(ms_AL.get(i).getThird_dest_eng());
 
                     }
+                }
+                else
+                {
+                    System.out.println("270: Cannot connect server");
                 }
 
                 ms_list.add(ms);
@@ -816,5 +825,55 @@ public class HomeFragment extends Fragment {
         }
     }
 
+
+    private class HttpAsyncTask2 extends AsyncTask<String, Void, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Boolean doInBackground(String... urls) {
+//            return GET(urls[0]);
+
+            System.out.println("HttpAsyncTask2");
+
+            InputStream inputStream = null;
+            String result = "";
+            try {
+                System.out.println("Connecting");
+//                URL url = new URL("http://antony9655.mynetgear.com");
+                URL url = new URL(urls[0]);
+
+                URLConnection conection = url.openConnection();
+                conection.setConnectTimeout(timeout_sec * 1000);
+                conection.connect();
+                System.out.println("280 : Server connected");
+
+                return true;
+            } catch(Exception e)
+            {
+                System.out.println("280a : cannot connect server");
+                return false;
+            }
+
+        }
+
+        private String convertInputStreamToString(InputStream inputStream) throws IOException {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line = "";
+            String result = "";
+            while ((line = bufferedReader.readLine()) != null)
+                result += line;
+
+            inputStream.close();
+
+            System.out.println("convertInputStreamToString : " + result);
+
+            return result;
+        }
+
+    }
 }
 
