@@ -29,10 +29,20 @@
 
     <string name="complain_title">Complain</string>
     <string name="complain_email_title">COMPLAINT ABOUT LOST TRIPS OF</string>
-    <string name="complain_email_content_pt1">Dear Sir/Madam,
-        I would like to complain there are lost of trips of Company
-</string>
-    <string name="complain_email_content_pt2">.The information is listed as below.</string>
+    <string name="complain_email_content_pt0">Dear Sir/Madam,</string>
+    <string name="complain_email_content_pt1">I would like to complain that there is lost of trips incident happened in </string>
+    <string name="complain_email_content_pt1a">Company.</string>
+    <string name="complain_email_content_pt2">The information is listed as below.</string>
+    <string name="complain_email_content_pt3">Time:</string>
+    <string name="complain_email_content_pt4">Company:</string>
+    <string name="complain_email_content_pt5">Route:</string>
+    <string name="complain_email_content_pt6">Bound (To):</string>
+    <string name="complain_email_content_pt7">Station:</string>
+    <string name="complain_email_content_pt8">1st Arrival Time (mins):</string>
+    <string name="complain_email_content_pt9">2nd Arrival Time (mins):</string>
+    <string name="complain_email_content_pt10">3nd Arrival Time (mins):</string>
+    <string name="complain_email_content_pt11">I look forward to your reply and a resolution to my problem.</string>
+    <string name="complain_email_content_pt12">Please contact me by this email address. Thanks.</string>
 
 
     <string name="contextMenu_addFavourite">Add Favourite</string>

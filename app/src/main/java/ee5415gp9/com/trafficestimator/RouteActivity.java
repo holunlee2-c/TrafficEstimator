@@ -42,7 +42,9 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -322,16 +324,53 @@ public class RouteActivity extends AppCompatActivity {
         String email_title = getString(R.string.complain_email_title) + " " + revised_company  + " - " + revised_line;
         System.out.println(email_title);
 
-        String email_content_pt1 = getString(R.string.complain_email_content_pt1) + " " + revised_company  + "</br>" ;
-        String email_content_pt2 = "</br> " + getString(R.string.complain_email_content_pt2) + ". </br>" ;
 
-        String email_content = email_content_pt1 + email_content_pt2;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date dt=new Date();
+
+        if(first_time == null)
+        {
+            first_time = "   ";
+            first_min = "   ";
+        }
+
+        if(second_time == null)
+        {
+            second_time = "   ";
+            second_min = "   ";
+        }
+
+        if(third_time == null)
+        {
+            third_time = "  ";
+            third_min = "  ";
+        }
+
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(getString(R.string.complain_email_content_pt0) + '\n' + '\n');
+        sb.append(getString(R.string.complain_email_content_pt1) + ' ' + revised_company + ' ' + getString(R.string.complain_email_content_pt1a) + '\n' + '\n');
+        sb.append(getString(R.string.complain_email_content_pt2) + '\n');
+        sb.append(getString(R.string.complain_email_content_pt3) + " " + sdf.format(dt) + ' ' + '\n');
+        sb.append(getString(R.string.complain_email_content_pt4) + " " + revised_company + '\n');
+        sb.append(getString(R.string.complain_email_content_pt5) + " " + line + '\n');
+        sb.append(getString(R.string.complain_email_content_pt6) + " " + dest + '\n');
+        sb.append(getString(R.string.complain_email_content_pt7) + " " + stop + '\n' + '\n');
+        sb.append(getString(R.string.complain_email_content_pt8) + ' ' + first_time + ' ' + '(' + first_min + "min" + ')' + '\n');
+        sb.append(getString(R.string.complain_email_content_pt9) + ' ' + second_time + ' ' + '(' + second_min + "min" + ')' + '\n');
+        sb.append(getString(R.string.complain_email_content_pt10) + ' ' + third_time + ' ' + '(' + third_min + "min" + ')' +  '\n' + '\n');
+        sb.append(getString(R.string.complain_email_content_pt11) + ' ');
+        sb.append(getString(R.string.complain_email_content_pt12) + '\n' + '\n');
+
+
+//        System.out.println("501 : " + sb.toString());
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:tellme@1823.gov.hk"));
         intent.putExtra(Intent.EXTRA_SUBJECT, email_title);
-        intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(email_content));
+//        intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(email_content));
+        intent.putExtra(android.content.Intent.EXTRA_TEXT, sb.toString());
         startActivity(intent);
     }
 
