@@ -330,20 +330,20 @@ public class RouteActivity extends AppCompatActivity {
 
         if(first_time == null)
         {
-            first_time = "   ";
-            first_min = "   ";
+            first_time = "-";
+            first_min = "-";
         }
 
         if(second_time == null)
         {
-            second_time = "   ";
-            second_min = "   ";
+            second_time = "-";
+            second_min = "-";
         }
 
         if(third_time == null)
         {
-            third_time = "  ";
-            third_min = "  ";
+            third_time = "-";
+            third_min = "-";
         }
 
 
