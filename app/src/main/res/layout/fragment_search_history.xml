@@ -23,14 +23,12 @@
             />
 
 
-        <TextView
+        <ImageView
             android:id="@+id/emptyView"
-            android:text="@string/history_no_route"
+            android:src="@drawable/nosearchdata"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="#7b00ff"
-            android:textSize="34sp"
             android:visibility="gone" />
 
     </android.support.constraint.ConstraintLayout>

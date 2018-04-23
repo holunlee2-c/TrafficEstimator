@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class SearchHistoryFragment extends Fragment {
 
-        private TextView emptyView;
+        private ImageView emptyView;
         private ListView mListView;
         public ListAdapter_SearchRoute mListAdapter;
 
@@ -129,7 +130,7 @@ public class SearchHistoryFragment extends Fragment {
 
                 FrameLayout view = (FrameLayout) inflater.inflate(R.layout.fragment_search_history, container, false);
 
-                emptyView = (TextView) view.findViewById(R.id.emptyView);
+                emptyView = (ImageView) view.findViewById(R.id.emptyView);
 
                 mListView = (ListView) view.findViewById(R.id.listview);
                 mListAdapter = new ListAdapter_SearchRoute(getActivity(), lines, dests, mtsicon, mtbg);
@@ -182,7 +183,7 @@ public class SearchHistoryFragment extends Fragment {
             else
             {
                 FrameLayout view = (FrameLayout) inflater.inflate(R.layout.fragment_search_history, container, false);
-                emptyView = (TextView) view.findViewById(R.id.emptyView);
+                emptyView = (ImageView) view.findViewById(R.id.emptyView);
                 mListView = (ListView) view.findViewById(R.id.listview);
 
                 mListView.setVisibility(View.GONE);

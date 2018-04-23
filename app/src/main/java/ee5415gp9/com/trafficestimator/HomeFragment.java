@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,7 +88,7 @@ public class HomeFragment extends Fragment {
 //    String[] third_dest_eng;
 
 
-    private TextView emptyView;
+    private ImageView emptyView;
 
     private ListView mListView;
     public ListAdapter mListAdapter;
@@ -111,7 +113,7 @@ public class HomeFragment extends Fragment {
 
         FrameLayout view = (FrameLayout) inflater.inflate(R.layout.fragment_home, container, false);
 
-        emptyView = (TextView) view.findViewById(R.id.emptyView);
+        emptyView = (ImageView) view.findViewById(R.id.emptyView);
         mListView = (ListView) view.findViewById(R.id.listview);
 
 
@@ -300,7 +302,7 @@ public class HomeFragment extends Fragment {
         {
 //            FrameLayout view = (FrameLayout) inflater.inflate(R.layout.fragment_search_history, container, false);
             System.out.println("208a: null" + mr_list.size());
-            emptyView = (TextView) view.findViewById(R.id.emptyView);
+            emptyView = (ImageView) view.findViewById(R.id.emptyView);
             mListView = (ListView) view.findViewById(R.id.listview);
 
             emptyView.setVisibility(View.VISIBLE);
