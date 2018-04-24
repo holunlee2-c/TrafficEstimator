@@ -158,10 +158,21 @@ public class RouteActivity extends AppCompatActivity {
         }
 
 
+        String revised_line = line;
+        if(line.equals("WRL"))
+            revised_line = "West Rail Line";
+        else if(line.equals("TCL"))
+            revised_line = "Tung Chung Line";
+        else if(line.equals("TKL"))
+            revised_line = "Tseung Kwan O Line";
+        else if(line.equals("AEL"))
+            revised_line = "Airport Express";
+
+
         line_textView = (TextView) findViewById(R.id.Line);
         destinationTxt = (TextView) findViewById(R.id.destinationTxt);
 
-        line_textView.setText(line);
+        line_textView.setText(revised_line);
         destinationTxt.setText(dest);
 
 
